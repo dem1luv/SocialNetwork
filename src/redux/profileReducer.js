@@ -5,7 +5,7 @@ const DO_UNLIKE = "DO-UNLIKE";
 
 let initState = {
     posts: [
-        {id: 0, text: "1488", date: "28.05.2020, 17:25:09", liked: false, likesCount: 0,},
+        {id: 0, text: "Hey, people, here's my first post!", date: "28.05.2020, 17:25:09", liked: false, likesCount: 0,},
     ],
     inputText: "",
     user: {id: 0, avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg", name: "Dmytry Demjanenko",},

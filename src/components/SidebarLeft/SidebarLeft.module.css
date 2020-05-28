@@ -1,0 +1,6 @@
+.aside {
+    grid-area: aside;
+}
+.aside a{
+    display: block;
+}
