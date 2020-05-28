@@ -29,9 +29,9 @@ function ProfilePosts(props) {
                 {props.posts.map((p) =>
                     <div className={s.item}>
                         <div className={s.ava}>
-                            <img src={props.user.avaUrl} alt=""/>
+                            <img src={p.user.avaUrl} alt=""/>
                         </div>
-                        <div>{props.user.name}</div>
+                        <div>{p.user.name}</div>
                         <div>{p.date}</div>
                         <div>{p.text}</div>
                         <div>{p.liked ?

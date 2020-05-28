@@ -1,5 +1,3 @@
-const ADD_POST = "ADD-POST";
-const CHANGE_INPUT = "CHANGE-INPUT";
 const DO_LIKE = "DO-LIKE";
 const DO_UNLIKE = "DO-UNLIKE";
 
@@ -15,37 +13,13 @@ let initState = {
                 id: 0,
                 avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
                 name: "Dmytry Demjanenko",
-            },
+            }
         },
     ],
-    inputText: "",
-    currentUser: {
-        id: 0,
-        avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
-        name: "Dmytry Demjanenko",
-    },
 }
 
-const profileReducer = (state = initState, action) => {
+const newsReducer = (state = initState, action) => {
     switch (action.type) {
-        case ADD_POST:
-            return {
-                ...state,
-                posts: [{
-                    id: state.posts.length,
-                    text: state.inputText,
-                    date: new Date().toLocaleString(),
-                    liked: false,
-                    likesCount: 0,
-                    user: {...state.currentUser},
-                }, ...state.posts,],
-                inputText: "",
-            }
-        case CHANGE_INPUT:
-            return {
-                ...state,
-                inputText: action.text,
-            }
         case DO_LIKE:
             return {
                 ...state,
@@ -73,13 +47,6 @@ const profileReducer = (state = initState, action) => {
     }
 }
 
-export const addPostAC = () => ({
-    type: ADD_POST,
-});
-export const changeInputAC = text => ({
-    type: CHANGE_INPUT,
-    text: text,
-});
 export const doLikeAC = postId => ({
     type: DO_LIKE,
     postId: postId,
@@ -89,4 +56,4 @@ export const doUnlikeAC = postId => ({
     postId: postId,
 });
 
-export default profileReducer;
+export default newsReducer;

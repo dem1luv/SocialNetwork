@@ -1,5 +1,4 @@
 import React from "react";
-import {Route} from "react-router-dom";
 import {connect} from "react-redux";
 import ProfilePosts from "./ProfilePosts";
 import {addPostAC, changeInputAC, doLikeAC, doUnlikeAC} from "../../../../redux/profileReducer";
@@ -7,7 +6,6 @@ import {addPostAC, changeInputAC, doLikeAC, doUnlikeAC} from "../../../../redux/
 const mapStateToProps = (state) => ({
     posts: state.profilePage.posts,
     inputText: state.profilePage.inputText,
-    user: state.profilePage.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
