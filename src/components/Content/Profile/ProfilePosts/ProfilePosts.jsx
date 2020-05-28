@@ -2,24 +2,42 @@ import React from "react";
 import s from "./ProfilePosts.module.css";
 
 function ProfilePosts(props) {
+
     const onAddPost = () => {
-        debugger;
-        props.addPost(props.user, "1488");
+        props.addPost();
+    }
+
+    const onChangeInput = e => {
+        props.changeInput(e.target.value);
+    }
+
+    const onDoLike = postId => {
+        props.doLike(postId);
+    }
+
+    const onDoUnlike = postId => {
+        props.doUnlike(postId);
     }
 
     return (
         <div>
             <div>
-                <input type="text"/>
+                <input type="text" value={props.inputText} onChange={onChangeInput}/>
                 <button onClick={onAddPost}>Post</button>
             </div>
             <div>
                 {props.posts.map((p) =>
-                    <div>
-                        <div>
-                            <img src="https://i.pinimg.com/originals/04/a8/73/04a87347b071ec062a586e02c23f6221.png" alt=""/>
+                    <div className={s.item}>
+                        <div className={s.ava}>
+                            <img src={props.user.avaUrl} alt=""/>
                         </div>
+                        <div>{props.user.name}</div>
+                        <div>{p.date}</div>
                         <div>{p.text}</div>
+                        <div>{p.liked ?
+                            <button onClick={() => {onDoUnlike(p.id)}}>{p.likesCount} Unlike</button> :
+                            <button onClick={() => {onDoLike(p.id)}}>{p.likesCount} Like</button>
+                            }</div>
                     </div>
                 )}
             </div>
