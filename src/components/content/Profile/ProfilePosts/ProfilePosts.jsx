@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./ProfilePosts.module.css";
-import Post from "../../../General/Post/Post";
+import Post from "../../../common/Post/Post";
 
 function ProfilePosts(props) {
 

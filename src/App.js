@@ -4,12 +4,12 @@ import './App.css';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Header from "./components/Header/Header";
 import SidebarLeft from "./components/SidebarLeft/SidebarLeft";
-import Profile from "./components/Content/Profile/Profile";
-import Messages from "./components/Content/Messages/Messages";
-import Music from "./components/Content/Music/Music";
-import Users from "./components/Content/Users/Users";
-import Settings from "./components/Content/Settings/Settings";
-import NewsContainer from "./components/Content/News/NewsContainer";
+import Profile from "./components/content/Profile/Profile";
+import Messages from "./components/content/Messages/Messages";
+import Music from "./components/content/Music/Music";
+import Users from "./components/content/Users/Users";
+import Settings from "./components/content/Settings/Settings";
+import NewsContainer from "./components/content/News/NewsContainer";
 
 function App() {
     return (

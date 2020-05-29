@@ -1,0 +1,75 @@
+.item {
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #c1c1c133;
+    padding: 15px 15px 15px 15px;
+}
+.item:last-child {
+    margin: 0;
+    border-bottom: none;
+}
+/* head */
+.head {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px 0;
+}
+/* ava */
+.ava {
+    overflow: hidden;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.ava img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+.ava img {
+    transition: transform .2s ease;
+}
+.ava:hover img {
+    transform: scale(1.35);
+}
+/* nameDate */
+.nameDate {
+    margin: 0 0 0 20px;
+}
+.nameDate div:first-child {
+    margin: 0 0 2px 0;
+}
+.nameDate a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.3em;
+}
+.nameDate a:hover {
+    text-decoration: underline;
+}
+/* text */
+.text {
+    color: #fff;
+    margin: 0 0 15px 0;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #c1c1c133;
+}
+/* stat */
+.stat {
+    display: flex;
+    align-items: center;
+}
+.stat button img{
+    width: 25px;
+    height: 25px;
+}
+.stat button {
+    background: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+.stat span {
+    margin: 0 0 0 7px;
+}

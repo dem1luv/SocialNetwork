@@ -38,6 +38,7 @@ body {
     line-height: 1.5;
     background-color: #282c34;
     color: #c1c1c1;
+    font-family: Montserrat, serif;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -89,7 +90,6 @@ select {
 
 .content {
     grid-area: content;
-    padding: 15px 20px;
 }
 
 .App-logo {
@@ -125,8 +125,4 @@ select {
     to {
         transform: rotate(360deg);
     }
-}
-
-body {
-    font-family: Montserrat;
 }
