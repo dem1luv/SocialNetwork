@@ -1,0 +1,7 @@
+.profile {
+    padding: 30px;
+    display: grid;
+    grid-template: "info info" "intro posts";
+    grid-template-columns: 240px auto;
+    grid-template-rows: auto auto;
+}

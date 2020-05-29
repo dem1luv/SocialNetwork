@@ -6,6 +6,7 @@ import {addPostAC, changeInputAC, doLikeAC, doUnlikeAC} from "../../../../redux/
 const mapStateToProps = (state) => ({
     posts: state.profilePage.posts,
     inputText: state.profilePage.inputText,
+    currentUser: state.profilePage.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

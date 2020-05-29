@@ -9,6 +9,7 @@ function ProfilePosts(props) {
     }
 
     const onChangeInput = e => {
+        e.target.style.height = e.target.scrollHeight + "px";
         props.changeInput(e.target.value);
     }
 
@@ -21,12 +22,13 @@ function ProfilePosts(props) {
     }
 
     return (
-        <div>
-            <div>
-                <input type="text" value={props.inputText} onChange={onChangeInput}/>
+        <div className={s.profilePosts}>
+            <div className={s.addPostContainer}>
+                <img src={props.currentUser.avaUrl} alt=""/>
+                <textarea type="text" value={props.inputText} onChange={onChangeInput} placeholder="Hey, what's up?"/>
                 <button onClick={onAddPost}>Post</button>
             </div>
-            <div>
+            <div className={s.postsContainer}>
                 {props.posts.map((p) => <Post user={p.user} date={p.date} text={p.text} liked={p.liked} id={p.id}
                                               likesCount={p.likesCount} doLike={props.doLike} doUnlike={props.doUnlike}/>)}
             </div>

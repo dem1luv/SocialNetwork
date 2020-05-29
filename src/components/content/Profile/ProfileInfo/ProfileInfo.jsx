@@ -1,20 +1,18 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
-import {Route} from "react-router-dom";
 
-function ProfileInfo() {
+function ProfileInfo(props) {
     return (
-        <header className={s.header}>
-            <img src="" alt=""/>
-            <span>
-                <Route path="/profile" render={() => "ProfileInfo"}/>
-                <Route path="/music" render={() => "Music"}/>
-                <Route path="/news" render={() => "News"}/>
-                <Route path="/users" render={() => "Users"}/>
-                <Route path="/messages" render={() => "Messages"}/>
-                <Route path="/settings" render={() => "Settings"}/>
-            </span>
-        </header>
+        <div className={s.profileInfo}>
+            <div className={s.background}>
+                <img src={props.user.bgUrl} alt=""/>
+            </div>
+            <div className={s.ava}>
+                <img src={props.user.avaUrl} alt=""/>
+            </div>
+            <div className={s.name}>{props.user.name}</div>
+            <div className={s.location}>{props.user.country}, {props.user.city}</div>
+        </div>
     );
 }
 
