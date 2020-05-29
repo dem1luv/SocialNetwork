@@ -1,32 +1,13 @@
 import React from "react";
 import s from "./News.module.css";
+import Post from "../../General/Post/Post";
 
 function News(props) {
-debugger;
-    const onDoLike = postId => {
-        props.doLike(postId);
-    }
-
-    const onDoUnlike = postId => {
-        props.doUnlike(postId);
-    }
 
     return (
         <div>
-            {props.posts.map((p) =>
-                <div className={s.item}>
-                    <div className={s.ava}>
-                        <img src={p.user.avaUrl} alt=""/>
-                    </div>
-                    <div>{p.user.name}</div>
-                    <div>{p.date}</div>
-                    <div>{p.text}</div>
-                    <div>{p.liked ?
-                        <button onClick={() => {onDoUnlike(p.id)}}>{p.likesCount} Unlike</button> :
-                        <button onClick={() => {onDoLike(p.id)}}>{p.likesCount} Like</button>
-                    }</div>
-                </div>
-            )}
+            {props.posts.map((p) => <Post user={p.user} date={p.date} text={p.text} liked={p.liked} id={p.id}
+                                          likesCount={p.likesCount} doLike={props.doLike} doUnlike={props.doUnlike}/>)}
         </div>
     );
 }
