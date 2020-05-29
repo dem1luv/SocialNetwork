@@ -36,7 +36,7 @@ body {
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
-    background-color: #282c34;
+    background-color: #1f2228;
     color: #c1c1c1;
     font-family: Montserrat, serif;
 }
@@ -69,6 +69,7 @@ button,
 textarea,
 select {
     font: inherit;
+    outline: none;
 }
 
 /* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */

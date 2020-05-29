@@ -1,11 +1,10 @@
 .item {
     margin: 0 0 15px 0;
-    border-bottom: 1px solid #c1c1c133;
-    padding: 15px 15px 15px 15px;
+    padding: 15px;
+    background: #282c34;
 }
 .item:last-child {
     margin: 0;
-    border-bottom: none;
 }
 /* head */
 .head {
