@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route} from 'react-router-dom';
-import Header from "./components/Header/Header";
 import Profile from "./components/content/Profile/Profile";
 import Messages from "./components/content/Messages/Messages";
 import Music from "./components/content/Music/Music";
@@ -10,12 +9,13 @@ import Users from "./components/content/Users/Users";
 import Settings from "./components/content/Settings/Settings";
 import NewsContainer from "./components/content/News/NewsContainer";
 import SidebarLeftContainer from "./components/SidebarLeft/SidebarLeftContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <Header/>
+                <HeaderContainer/>
                 <SidebarLeftContainer/>
                 <main className="content">
                     <Route path="/profile" component={Profile}/>

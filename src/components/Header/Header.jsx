@@ -1,19 +1,29 @@
 import React from "react";
 import s from "./Header.module.css";
-import {Route} from "react-router-dom";
+import arrowDown from "../../assets/svg/arrowDown.svg";
+import {NavLink} from "react-router-dom";
 
-function Header() {
+function Header(props) {
+
+    let userMenuNavElement = React.createRef();
+
+    const toggleUserMenuNav = () => {
+        debugger;
+        userMenuNavElement.current.style.display = userMenuNavElement.current.style.display === "block" ? "none" : "block";
+    }
+
     return (
         <header className={s.header}>
-            <img src="" alt=""/>
-            <span>
-                <Route path="/profile" render={() => "Profile"}/>
-                <Route path="/music" render={() => "Music"}/>
-                <Route path="/news" render={() => "News"}/>
-                <Route path="/users" render={() => "Users"}/>
-                <Route path="/messages" render={() => "Messages"}/>
-                <Route path="/settings" render={() => "Settings"}/>
-            </span>
+            <button className={s.userMenu} onClick={toggleUserMenuNav}>
+                <img className={s.ava} src={props.user.avaUrl} alt=""/>
+                <span>{props.user.name}</span>
+                <img className={s.arrow} src={arrowDown} alt=""/>
+                <div className={s.userMenuNav} ref={userMenuNavElement}>
+                    <NavLink to={`/profile/${props.user.id}`}>Profile</NavLink>
+                    <NavLink to="/settings">Settings</NavLink>
+                    <button onClick={props.logOut}>Log Out</button>
+                </div>
+            </button>
         </header>
     );
 }
