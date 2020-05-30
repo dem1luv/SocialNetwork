@@ -4,33 +4,31 @@ import Post from "../../../common/Post/Post";
 
 function ProfilePosts(props) {
 
+    let textareaElement = React.createRef();
+
     const onAddPost = () => {
+        textareaElement.current.style.height = "33px";
         props.addPost();
     }
 
     const onChangeInput = e => {
-        e.target.style.height = e.target.scrollHeight + "px";
+        e.target.style.height = "33px";
+        e.target.style.height = (e.target.scrollHeight) + "px";
         props.changeInput(e.target.value);
-    }
-
-    const onDoLike = postId => {
-        props.doLike(postId);
-    }
-
-    const onDoUnlike = postId => {
-        props.doUnlike(postId);
     }
 
     return (
         <div className={s.profilePosts}>
             <div className={s.addPostContainer}>
                 <img src={props.currentUser.avaUrl} alt=""/>
-                <textarea type="text" value={props.inputText} onChange={onChangeInput} placeholder="Hey, what's up?"/>
+                <textarea type="text" value={props.inputText} onChange={onChangeInput} placeholder="Hey, what's up?"
+                          ref={textareaElement}/>
                 <button onClick={onAddPost}>Post</button>
             </div>
             <div className={s.postsContainer}>
                 {props.posts.map((p) => <Post user={p.user} date={p.date} text={p.text} liked={p.liked} id={p.id}
-                                              likesCount={p.likesCount} doLike={props.doLike} doUnlike={props.doUnlike}/>)}
+                                              likesCount={p.likesCount} doLike={props.doLike}
+                                              doUnlike={props.doUnlike}/>)}
             </div>
         </div>
     );

@@ -13,8 +13,8 @@ const mapDispatchToProps = (dispatch) => ({
     addPost: () => {
         dispatch(addPostAC());
     },
-    changeInput: text => {
-        dispatch(changeInputAC(text));
+    changeInput: (text, scrollHeight) => {
+        dispatch(changeInputAC(text, scrollHeight));
     },
     doLike: postId => {
         dispatch(doLikeAC(postId))
