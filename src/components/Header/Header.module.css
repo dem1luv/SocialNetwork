@@ -1,8 +1,11 @@
 .header {
-    background-color: #15171c;
+    background-color: #004c99;
     color: #fff;
     grid-area: header;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }

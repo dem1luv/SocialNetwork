@@ -85,8 +85,8 @@ select {
 .App {
     display: grid;
     grid-template: "header header" "aside content";
-    grid-template-columns: 1fr 10fr;
-    grid-template-rows: 80px 8fr;
+    grid-template-columns: auto 10fr;
+    grid-template-rows: 50px 8fr;
 }
 
 .content {
