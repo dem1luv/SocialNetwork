@@ -8,7 +8,7 @@ function ProfilePosts(props) {
 
     const onAddPost = () => {
         textareaElement.current.style.height = "33px";
-        props.addPost();
+        props.addPost(props.currentUser);
     }
 
     const onChangeInput = e => {

@@ -4,7 +4,7 @@ import Header from "./Header";
 import {logOutAC} from "../../redux/headerReducer";
 
 const mapStateToProps = state => ({
-    user: state.header.currentUser,
+    user: state.currentUser.user,
 });
 
 const mapDispatchToProps = dispatch => ({

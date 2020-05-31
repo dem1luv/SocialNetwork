@@ -19,11 +19,6 @@ let initState = {
         },
     ],
     inputText: "",
-    currentUser: {
-        id: 0,
-        avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
-        name: "Dmytry Demjanenko",
-    },
     user: {
         id: 0,
         avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
@@ -51,7 +46,7 @@ const profileReducer = (state = initState, action) => {
                     date: new Date().toLocaleString(),
                     liked: false,
                     likesCount: 0,
-                    user: {...state.currentUser},
+                    user: {...action.currentUser},
                 }, ...state.posts,],
                 inputText: "",
             }
@@ -87,8 +82,9 @@ const profileReducer = (state = initState, action) => {
     }
 }
 
-export const addPostAC = () => ({
+export const addPostAC = currentUser => ({
     type: ADD_POST,
+    currentUser: currentUser,
 });
 export const changeInputAC = text => ({
     type: CHANGE_INPUT,

@@ -2,16 +2,17 @@ import React from "react";
 import {connect} from "react-redux";
 import ProfilePosts from "./ProfilePosts";
 import {addPostAC, changeInputAC, doLikeAC, doUnlikeAC} from "../../../../redux/profileReducer";
+import currentUserReducer from "../../../../redux/currentUserReducer";
 
 const mapStateToProps = (state) => ({
     posts: state.profilePage.posts,
     inputText: state.profilePage.inputText,
-    currentUser: state.profilePage.currentUser,
+    currentUser: state.currentUser.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addPost: () => {
-        dispatch(addPostAC());
+    addPost: currentUser => {
+        dispatch(addPostAC(currentUser));
     },
     changeInput: (text, scrollHeight) => {
         dispatch(changeInputAC(text, scrollHeight));
