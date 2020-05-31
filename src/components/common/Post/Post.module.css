@@ -16,7 +16,7 @@
 .ava {
     overflow: hidden;
     display: inline-block;
-    width: 80px;
+    flex: 0 0 80px;
     height: 80px;
     border-radius: 50%;
 }

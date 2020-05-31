@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import SettingsContent from "./SettingsContent";
 
 const mapStateToProps = state => ({
-    currentUser: state.currentUser.user,
+    currentUser: state.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({

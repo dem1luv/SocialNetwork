@@ -1,10 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import Header from "./Header";
-import {logOutAC} from "../../redux/headerReducer";
+import {logOutAC} from "../../redux/currentUserReducer";
 
 const mapStateToProps = state => ({
-    user: state.currentUser.user,
+    user: state.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,5 +1,19 @@
-.settingsContent {
-    grid-area: content;
-    background-color: #282c34;
-    padding: 25px;
+.settingsContent h2 {
+    margin: 0 0 20px 0;
+}
+.item {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px 0;
+}
+.item:last-child {
+    margin: 0;
+}
+.item span{
+    display: inline-block;
+    width: 200px;
+}
+.item input {
+    flex: 1 1 auto;
+    margin: 0 10px 0 0;
 }

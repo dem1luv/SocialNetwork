@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import SidebarLeft from "./SidebarLeft";
 
 const mapStateToProps = state => ({
-    userId: state.currentUser.user.id,
+    userId: state.currentUser.id,
 });
 
 const mapDispatchToProps = () => ({});

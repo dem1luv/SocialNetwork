@@ -7,7 +7,7 @@ import currentUserReducer from "../../../../redux/currentUserReducer";
 const mapStateToProps = (state) => ({
     posts: state.profilePage.posts,
     inputText: state.profilePage.inputText,
-    currentUser: state.currentUser.user,
+    currentUser: state.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
