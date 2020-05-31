@@ -8,7 +8,6 @@ function Header(props) {
     let userMenuNavElement = React.createRef();
 
     const toggleUserMenuNav = () => {
-        debugger;
         userMenuNavElement.current.style.display = userMenuNavElement.current.style.display === "block" ? "none" : "block";
     }
 
@@ -20,7 +19,7 @@ function Header(props) {
                 <img className={s.arrow} src={arrowDown} alt=""/>
                 <div className={s.userMenuNav} ref={userMenuNavElement}>
                     <NavLink to={`/profile/${props.user.id}`}>Profile</NavLink>
-                    <NavLink to="/settings">Settings</NavLink>
+                    <NavLink to="/settings/profile">Settings</NavLink>
                     <button onClick={props.logOut}>Log Out</button>
                 </div>
             </button>

@@ -13,6 +13,6 @@
     font-size: 18px;
     color: #fff;
 }
-.aside a:hover {
+.aside a.active {
     background: #1f2228;
 }

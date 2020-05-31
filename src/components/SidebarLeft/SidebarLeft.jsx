@@ -6,12 +6,12 @@ function SidebarLeft(props) {
     return (
         <aside className={s.aside}>
             <nav>
-                <NavLink to={`/profile/${props.userId}`}>Profile</NavLink>
-                <NavLink to={"/news"}>News</NavLink>
-                <NavLink to={"/messages"}>Messages</NavLink>
-                <NavLink to={"/music"}>Music</NavLink>
-                <NavLink to={"/users"}>Users</NavLink>
-                <NavLink to={"/settings"}>Settings</NavLink>
+                <NavLink to={`/profile/${props.userId}`} activeClassName={s.active}>Profile</NavLink>
+                <NavLink to={"/news"} activeClassName={s.active}>News</NavLink>
+                <NavLink to={"/messages"} activeClassName={s.active}>Messages</NavLink>
+                <NavLink to={"/music"} activeClassName={s.active}>Music</NavLink>
+                <NavLink to={"/users"} activeClassName={s.active}>Users</NavLink>
+                <NavLink to={"/settings/profile"} activeClassName={s.active}    >Settings</NavLink>
             </nav>
         </aside>
     );
