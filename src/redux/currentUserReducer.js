@@ -3,6 +3,9 @@ const SET_AVA = "SET-AVA";
 const SET_CITY = "SET-CITY";
 const SET_COUNTRY = "SET-COUNTRY";
 const LOG_OUT = "LOG-OUT";
+const ADD_INTRO = "ADD-INTRO";
+const SET_INTRO = "SET-INTRO";
+const DELETE_INTRO = "DELETE-INTRO";
 
 let initState = {
     id: 0,
@@ -12,9 +15,9 @@ let initState = {
     city: "Sumy",
     country: "Ukraine",
     intro: [
-        {title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
-        {title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
-        {title: "Best Friend", text: "Me"},
+        {id: 0, title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
+        {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
+        {id: 2, title: "Best Friend", text: "Me"},
     ],
 }
 
@@ -43,6 +46,32 @@ const currentUserReducer = (state = initState, action) => {
         case LOG_OUT:
             alert("ur logged out");
             return state;
+        case ADD_INTRO:
+            return {
+                ...state,
+                intro: [...state.intro, {id: state.intro.length, title: action.title, text: action.text}],
+            }
+        case SET_INTRO: {
+            debugger;
+            let newIntro = [...state.intro];
+            newIntro[action.id] = {id: action.id, title: action.title, text: action.text};
+            return {
+                ...state,
+                intro: newIntro,
+            }
+        }
+        case DELETE_INTRO: {
+            let newIntro = [...state.intro];
+            newIntro.splice(newIntro.forEach( (i, index) => {
+                if (i.id === action.id) {
+                    return index;
+                }
+            }), 1);
+            return {
+                ...state,
+                intro: newIntro,
+            }
+        }
         default:
             return state;
     }
@@ -71,5 +100,21 @@ export const setCountryAC = (user, country) => ({
 export const logOutAC = () => ({
     type: LOG_OUT,
 });
+export const addIntroAC = (title, text) => ({
+    type: ADD_INTRO,
+    title: title,
+    text: text,
+});
+export const setIntroAC = (id, title, text) => ({
+    type: SET_INTRO,
+    id: id,
+    title: title,
+    text: text,
+});
+export const deleteIntroAC = id => ({
+    type: DELETE_INTRO,
+    id: id,
+});
+
 
 export default currentUserReducer;

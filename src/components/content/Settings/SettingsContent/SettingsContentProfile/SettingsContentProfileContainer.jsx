@@ -1,7 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import SettingsContentProfile from "./SettingsContentProfile";
-import {setAvaAC, setCityAC, setCountryAC, setNameAC} from "../../../../../redux/currentUserReducer";
+import {
+    addIntroAC, deleteIntroAC,
+    setAvaAC,
+    setCityAC,
+    setCountryAC,
+    setIntroAC,
+    setNameAC
+} from "../../../../../redux/currentUserReducer";
 
 const mapStateToProps = state => ({
     currentUser: state.currentUser,
@@ -19,6 +26,15 @@ const mapDispatchToProps = dispatch => ({
     },
     setCountry: (currentUser, country) => {
         dispatch(setCountryAC(currentUser, country));
+    },
+    addIntro: (title, text) => {
+        dispatch(addIntroAC(title, text));
+    },
+    setIntro: (id, title, text) => {
+        dispatch(setIntroAC(id, title, text));
+    },
+    deleteIntro: id => {
+        dispatch(deleteIntroAC(id));
     },
 });
 
