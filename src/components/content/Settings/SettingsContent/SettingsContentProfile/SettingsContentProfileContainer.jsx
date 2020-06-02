@@ -2,12 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import SettingsContentProfile from "./SettingsContentProfile";
 import {
-    addIntroAC, deleteIntroAC,
+    addIntroAC, deleteIntroAC, saveChangesAC,
     setAvaAC,
     setCityAC,
     setCountryAC,
     setIntroAC,
-    setNameAC
+    setNameAC, updateTextInputs
 } from "../../../../../redux/currentUserReducer";
 
 const mapStateToProps = state => ({
@@ -35,6 +35,12 @@ const mapDispatchToProps = dispatch => ({
     },
     deleteIntro: id => {
         dispatch(deleteIntroAC(id));
+    },
+    saveChanges: () => {
+        dispatch(saveChangesAC());
+    },
+    updateTextInputs: () => {
+        dispatch(updateTextInputs());
     },
 });
 

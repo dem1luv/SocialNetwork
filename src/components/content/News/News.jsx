@@ -2,14 +2,18 @@ import React from "react";
 import s from "./News.module.css";
 import Post from "../../common/Post/Post";
 
-function News(props) {
+class News extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <div className={s.news}>
-            {props.posts.map((p) => <Post user={p.user} date={p.date} text={p.text} liked={p.liked} id={p.id}
-                                          likesCount={p.likesCount} doLike={props.doLike} doUnlike={props.doUnlike}/>)}
-        </div>
-    );
+    render() {
+        return (
+            <div className={s.news}>
+                {this.props.posts.map((p) => <Post post={p} doLike={this.props.doLike} doUnlike={this.props.doUnlike}/>)}
+            </div>
+        );
+    }
 }
 
 export default News;

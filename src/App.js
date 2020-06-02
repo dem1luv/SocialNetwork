@@ -11,23 +11,25 @@ import NewsContainer from "./components/content/News/NewsContainer";
 import SidebarLeftContainer from "./components/SidebarLeft/SidebarLeftContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
-function App() {
-    return (
-        <BrowserRouter>
-            <div className="App">
-                <HeaderContainer/>
-                <SidebarLeftContainer/>
-                <main className="content">
-                    <Route path="/profile" component={Profile}/>
-                    <Route path="/news" component={NewsContainer}/>
-                    <Route path="/messages" component={Messages}/>
-                    <Route path="/music" component={Music}/>
-                    <Route path="/users" component={Users}/>
-                    <Route path="/settings" component={Settings}/>
-                </main>
-            </div>
-        </BrowserRouter>
-    );
+class App extends React.Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <HeaderContainer/>
+                    <SidebarLeftContainer/>
+                    <main className="content">
+                        <Route path="/profile" component={Profile}/>
+                        <Route path="/news" component={NewsContainer}/>
+                        <Route path="/messages" component={Messages}/>
+                        <Route path="/music" component={Music}/>
+                        <Route path="/users" component={Users}/>
+                        <Route path="/settings" component={Settings}/>
+                    </main>
+                </div>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default App;

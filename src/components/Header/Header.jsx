@@ -3,28 +3,32 @@ import s from "./Header.module.css";
 import arrowDown from "../../assets/svg/arrowDown.svg";
 import {NavLink} from "react-router-dom";
 
-function Header(props) {
-
-    let userMenuNavElement = React.createRef();
-
-    const toggleUserMenuNav = () => {
-        userMenuNavElement.current.style.display = userMenuNavElement.current.style.display === "block" ? "none" : "block";
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.userMenuNavElement = React.createRef();
     }
 
-    return (
-        <header className={s.header}>
-            <button className={s.userMenu} onClick={toggleUserMenuNav}>
-                <img className={s.ava} src={props.user.avaUrl} alt=""/>
-                <span>{props.user.name}</span>
-                <img className={s.arrow} src={arrowDown} alt=""/>
-                <div className={s.userMenuNav} ref={userMenuNavElement}>
-                    <NavLink to={`/profile/${props.user.id}`}>Profile</NavLink>
-                    <NavLink to="/settings/profile">Settings</NavLink>
-                    <button onClick={props.logOut}>Log Out</button>
-                </div>
-            </button>
-        </header>
-    );
+    toggleUserMenuNav() {
+        this.userMenuNavElement.current.style.display = this.userMenuNavElement.current.style.display === "block" ? "none" : "block";
+    }
+
+    render() {
+        return (
+            <header className={s.header}>
+                <button className={s.userMenu} onClick={this.toggleUserMenuNav.bind(this)}>
+                    <img className={s.ava} src={this.props.user.avaUrl} alt=""/>
+                    <span>{this.props.user.name}</span>
+                    <img className={s.arrow} src={arrowDown} alt=""/>
+                    <div className={s.userMenuNav} ref={this.userMenuNavElement}>
+                        <NavLink to={`/profile/${this.props.user.id}`}>Profile</NavLink>
+                        <NavLink to="/settings/profile">Settings</NavLink>
+                        <button onClick={this.props.logOut}>Log Out</button>
+                    </div>
+                </button>
+            </header>
+        );
+    }
 }
 
 export default Header;

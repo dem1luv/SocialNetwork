@@ -2,11 +2,12 @@ import React from "react";
 import s from "./Messages.module.css";
 import {Route} from "react-router-dom";
 
-function Messages() {
-    return (
-        <header className={s.header}>
-            <img src="" alt=""/>
-            <span>
+class Messages extends React.Component {
+    render() {
+        return (
+            <header className={s.header}>
+                <img src="" alt=""/>
+                <span>
                 <Route path="/profile" render={() => "Profile"}/>
                 <Route path="/music" render={() => "Music"}/>
                 <Route path="/news" render={() => "News"}/>
@@ -14,8 +15,9 @@ function Messages() {
                 <Route path="/messages" render={() => "Messages"}/>
                 <Route path="/settings" render={() => "Settings"}/>
             </span>
-        </header>
-    );
+            </header>
+        );
+    }
 }
 
 export default Messages;

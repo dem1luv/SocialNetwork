@@ -2,63 +2,73 @@ import React from "react";
 import s from "./SettingsContentProfile.module.css";
 import SettingsContentProfileIntro from "./SettingsContentProfileIntro/SettingsContentProfileIntro";
 
-function SettingsContentProfile(props) {
-    let inputName = React.createRef();
-    let inputAva = React.createRef();
-    let inputCity = React.createRef();
-    let inputCountry = React.createRef();
-
-    const onSetName = () => {
-        props.setName(props.currentUser, inputName.current.value);
-    }
-    const onSetAva = () => {
-        props.setAva(props.currentUser, inputAva.current.value);
-    }
-    const onSetCity = () => {
-        props.setCity(props.currentUser, inputCity.current.value);
-    }
-    const onSetCountry = () => {
-        props.setCountry(props.currentUser, inputCountry.current.value);
-    }
-    const onAddIntro = () => {
-        props.addIntro(`Title ${props.currentUser.intro.length}`, `Text ${props.currentUser.intro.length}`);
+class SettingsContentProfile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.inputName = React.createRef();
+        this.inputAva = React.createRef();
+        this.inputCity = React.createRef();
+        this.inputCountry = React.createRef();
+        props.updateTextInputs();
     }
 
-    return (
-        <div className={s.settingsContent}>
-            <img src="" alt=""/>
-            <h2>Profile Settings</h2>
-            <div>
-                <div className={s.item}>
-                    <span>Name:</span>
-                    <input type="text" defaultValue={props.currentUser.name} ref={inputName}/>
-                    <button onClick={onSetName}>Change</button>
+    onSetName() {
+        this.props.setName(this.props.currentUser, this.inputName.current.value);
+    }
+    onSetAva() {
+        this.props.setAva(this.props.currentUser, this.inputAva.current.value);
+    }
+    onSetCity() {
+        this.props.setCity(this.props.currentUser, this.inputCity.current.value);
+    }
+    onSetCountry() {
+        this.props.setCountry(this.props.currentUser, this.inputCountry.current.value);
+    }
+    onAddIntro() {
+        this.props.addIntro(`Title ${this.props.currentUser.intro.length}`, `Text ${this.props.currentUser.intro.length}`);
+    }
+    onSaveChanges() {
+        this.props.saveChanges();
+    }
+
+    render() {
+        return (
+            <div className={s.settingsContent}>
+                <img src="" alt=""/>
+                <h2>Profile Settings</h2>
+                <div>
+                    <div className={s.item}>
+                        <span>Name:</span>
+                        <input type="text" defaultValue={this.props.currentUser.name} ref={this.inputName}/>
+                        <button onClick={this.onSetName.bind(this)}>Change</button>
+                    </div>
+                    <div className={s.item}>
+                        <span>Avatar (URL):</span>
+                        <input type="text" defaultValue={this.props.currentUser.avaUrl} ref={this.inputAva}/>
+                        <button onClick={this.onSetAva.bind(this)}>Change</button>
+                    </div>
+                    <div className={s.item}>
+                        <span>City:</span>
+                        <input type="text" defaultValue={this.props.currentUser.city} ref={this.inputCity}/>
+                        <button onClick={this.onSetCity.bind(this)}>Change</button>
+                    </div>
+                    <div className={s.item}>
+                        <span>Country:</span>
+                        <input type="text" defaultValue={this.props.currentUser.country} ref={this.inputCountry}/>
+                        <button onClick={this.onSetCountry.bind(this)}>Change</button>
+                    </div>
                 </div>
-                <div className={s.item}>
-                    <span>Avatar (URL):</span>
-                    <input type="text" defaultValue={props.currentUser.avaUrl} ref={inputAva}/>
-                    <button onClick={onSetAva}>Change</button>
+                <h2>Intro</h2>
+                <div>
+                    {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro intro={i}
+                                                                                   setIntro={this.props.setIntro}
+                                                                                   deleteIntro={this.props.deleteIntro}/>)}
+                    <button onClick={this.onAddIntro.bind(this)}>Add Intro</button>
                 </div>
-                <div className={s.item}>
-                    <span>City:</span>
-                    <input type="text" defaultValue={props.currentUser.city} ref={inputCity}/>
-                    <button onClick={onSetCity}>Change</button>
-                </div>
-                <div className={s.item}>
-                    <span>Country:</span>
-                    <input type="text" defaultValue={props.currentUser.country} ref={inputCountry}/>
-                    <button onClick={onSetCountry}>Change</button>
-                </div>
+                <button onClick={this.onSaveChanges.bind(this)}>Save Changes</button>
             </div>
-            <h2>Intro</h2>
-            <div>
-                {props.currentUser.intro.map(i => <SettingsContentProfileIntro intro={i}
-                                                                               setIntro={props.setIntro}
-                                                                               deleteIntro={props.deleteIntro}/>)}
-                <button onClick={onAddIntro}>Add Intro</button>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default SettingsContentProfile;

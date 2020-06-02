@@ -1,19 +1,25 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 
-function ProfileInfo(props) {
-    return (
-        <div className={s.profileInfo}>
-            <div className={s.background}>
-                <img src={props.user.bgUrl} alt=""/>
+class ProfileInfo extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className={s.profileInfo}>
+                <div className={s.background}>
+                    <img src={this.props.user.bgUrl} alt=""/>
+                </div>
+                <div className={s.ava}>
+                    <img src={this.props.user.avaUrl} alt=""/>
+                </div>
+                <div className={s.name}>{this.props.user.name}</div>
+                <div className={s.location}>{this.props.user.country}, {this.props.user.city}</div>
             </div>
-            <div className={s.ava}>
-                <img src={props.user.avaUrl} alt=""/>
-            </div>
-            <div className={s.name}>{props.user.name}</div>
-            <div className={s.location}>{props.user.country}, {props.user.city}</div>
-        </div>
-    );
+        );
+    }
 }
 
 export default ProfileInfo;

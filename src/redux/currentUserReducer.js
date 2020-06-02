@@ -6,19 +6,27 @@ const LOG_OUT = "LOG-OUT";
 const ADD_INTRO = "ADD-INTRO";
 const SET_INTRO = "SET-INTRO";
 const DELETE_INTRO = "DELETE-INTRO";
+const SAVE_CHANGES = "SAVE-CHANGES";
+const UPDATE_TEXT_INPUTS = "UPDATE-TEXT-INPUTS";
 
 let initState = {
     id: 0,
     avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
+    avaUrlTextInput: "",
     bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
+    bgUrlTextInput: "",
     name: "Dmytry Demjanenko",
+    nameTextInput: "",
     city: "Sumy",
+    cityTextInput: "",
     country: "Ukraine",
+    countryTextInput: "",
     intro: [
         {id: 0, title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
         {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
         {id: 2, title: "Best Friend", text: "Me"},
     ],
+    introTextInput: [],
 }
 
 const currentUserReducer = (state = initState, action) => {
@@ -72,6 +80,11 @@ const currentUserReducer = (state = initState, action) => {
                 intro: newIntro,
             }
         }
+        case SAVE_CHANGES:
+            return state;
+        case UPDATE_TEXT_INPUTS:
+            alert("UPDATE_TEXT_INPUTS");
+            return state;
         default:
             return state;
     }
@@ -115,6 +128,11 @@ export const deleteIntroAC = id => ({
     type: DELETE_INTRO,
     id: id,
 });
-
+export const saveChangesAC = () => ({
+    type: SAVE_CHANGES,
+});
+export const updateTextInputs = () => ({
+    type: UPDATE_TEXT_INPUTS,
+});
 
 export default currentUserReducer;
