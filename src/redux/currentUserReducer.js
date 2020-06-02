@@ -12,21 +12,15 @@ const UPDATE_TEXT_INPUTS = "UPDATE-TEXT-INPUTS";
 let initState = {
     id: 0,
     avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
-    avaUrlTextInput: "",
     bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
-    bgUrlTextInput: "",
     name: "Dmytry Demjanenko",
-    nameTextInput: "",
     city: "Sumy",
-    cityTextInput: "",
     country: "Ukraine",
-    countryTextInput: "",
     intro: [
         {id: 0, title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
         {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
         {id: 2, title: "Best Friend", text: "Me"},
     ],
-    introTextInput: [],
 }
 
 const currentUserReducer = (state = initState, action) => {
@@ -57,10 +51,9 @@ const currentUserReducer = (state = initState, action) => {
         case ADD_INTRO:
             return {
                 ...state,
-                intro: [...state.intro, {id: state.intro.length, title: action.title, text: action.text}],
+                intro: [...state.intro, {id: state.intro.length === 0 ? 0 : state.intro[state.intro.length - 1].id + 1, title: action.title, text: action.text}],
             }
         case SET_INTRO: {
-            debugger;
             let newIntro = [...state.intro];
             newIntro[action.id] = {id: action.id, title: action.title, text: action.text};
             return {
@@ -83,7 +76,6 @@ const currentUserReducer = (state = initState, action) => {
         case SAVE_CHANGES:
             return state;
         case UPDATE_TEXT_INPUTS:
-            alert("UPDATE_TEXT_INPUTS");
             return state;
         default:
             return state;

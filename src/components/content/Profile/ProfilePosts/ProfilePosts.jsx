@@ -12,7 +12,6 @@ class ProfilePosts extends React.Component {
         this.textareaElement.current.style.height = "33px";
         this.props.addPost(this.props.currentUser);
     }
-
     onChangeInput(e) {
         e.target.style.height = "33px";
         e.target.style.height = (e.target.scrollHeight) + "px";
@@ -24,7 +23,7 @@ class ProfilePosts extends React.Component {
             <div className={s.profilePosts}>
                 <div className={s.addPostContainer}>
                     <img src={this.props.currentUser.avaUrl} alt=""/>
-                    <textarea type="text" value={this.props.inputText} onChange={this.onChangeInput.bind(this)} placeholder="Hey, what's up?"
+                    <textarea type="text" value={this.props.textInput} onChange={this.onChangeInput.bind(this)} placeholder="Hey, what's up?"
                               ref={this.textareaElement}/>
                     <button onClick={this.onAddPost.bind(this)}>Post</button>
                 </div>

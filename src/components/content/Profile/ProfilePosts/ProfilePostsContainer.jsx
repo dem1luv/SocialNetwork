@@ -6,7 +6,7 @@ import currentUserReducer from "../../../../redux/currentUserReducer";
 
 const mapStateToProps = (state) => ({
     posts: state.profilePage.posts,
-    inputText: state.profilePage.inputText,
+    inputText: state.profilePage.textInput,
     currentUser: state.currentUser,
 });
 

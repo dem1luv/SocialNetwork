@@ -6,12 +6,21 @@ class SettingsContentProfileIntro extends React.Component {
         super(props);
         this.inputTitle = React.createRef();
         this.inputText = React.createRef();
+        this.titleInput = props.intro.title;
+        this.textInput = props.intro.text;
     }
 
+    onChangeTitle(e) {
+        this.titleInput = e.target.value;
+        this.forceUpdate();
+    }
+    onChangeText(e) {
+        this.textInput = e.target.value;
+        this.forceUpdate();
+    }
     onSetIntro() {
-        this.props.setIntro(this.props.intro.id, this.props.inputTitle.current.value, this.props.inputText.current.value);
+        this.props.setIntro(this.props.intro.id, this.inputTitle.current.value, this.inputText.current.value);
     }
-
     onDeleteIntro() {
         this.props.deleteIntro(this.props.intro.id);
     }
@@ -21,11 +30,11 @@ class SettingsContentProfileIntro extends React.Component {
             <div className={s.intro}>
                 <div>
                     <span>Title:</span>
-                    <input type="text" defaultValue={this.props.intro.title} ref={this.props.inputTitle}/>
+                    <input type="text" value={this.titleInput} onChange={this.onChangeTitle.bind(this)} ref={this.inputTitle}/>
                 </div>
                 <div>
                     <span>Text:</span>
-                    <textarea defaultValue={this.props.intro.text} ref={this.props.inputText}/>
+                    <textarea value={this.textInput} onChange={this.onChangeText.bind(this)} ref={this.inputText}/>
                 </div>
                 <button onClick={this.onSetIntro.bind(this)}>Change</button>
                 <button onClick={this.onDeleteIntro.bind(this)}>Delete</button>

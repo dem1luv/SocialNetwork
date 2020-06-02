@@ -9,29 +9,35 @@ class SettingsContentProfile extends React.Component {
         this.inputAva = React.createRef();
         this.inputCity = React.createRef();
         this.inputCountry = React.createRef();
-        props.updateTextInputs();
+        //props.updateTextInputs();
     }
 
     onSetName() {
         this.props.setName(this.props.currentUser, this.inputName.current.value);
     }
+
     onSetAva() {
         this.props.setAva(this.props.currentUser, this.inputAva.current.value);
     }
+
     onSetCity() {
         this.props.setCity(this.props.currentUser, this.inputCity.current.value);
     }
+
     onSetCountry() {
         this.props.setCountry(this.props.currentUser, this.inputCountry.current.value);
     }
+
     onAddIntro() {
         this.props.addIntro(`Title ${this.props.currentUser.intro.length}`, `Text ${this.props.currentUser.intro.length}`);
     }
+
     onSaveChanges() {
         this.props.saveChanges();
     }
 
     render() {
+        debugger;
         return (
             <div className={s.settingsContent}>
                 <img src="" alt=""/>
@@ -60,9 +66,10 @@ class SettingsContentProfile extends React.Component {
                 </div>
                 <h2>Intro</h2>
                 <div>
-                    {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro intro={i}
-                                                                                   setIntro={this.props.setIntro}
-                                                                                   deleteIntro={this.props.deleteIntro}/>)}
+                    {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro key={i.id}
+                                                                                        intro={i}
+                                                                                        setIntro={this.props.setIntro}
+                                                                                        deleteIntro={this.props.deleteIntro}/>)}
                     <button onClick={this.onAddIntro.bind(this)}>Add Intro</button>
                 </div>
                 <button onClick={this.onSaveChanges.bind(this)}>Save Changes</button>

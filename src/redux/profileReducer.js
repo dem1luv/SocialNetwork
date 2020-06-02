@@ -18,7 +18,7 @@ let initState = {
             },
         },
     ],
-    inputText: "",
+    textInput: "",
     user: {
         id: 0,
         avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
@@ -40,19 +40,19 @@ const profileReducer = (state = initState, action) => {
             return {
                 ...state,
                 posts: [{
-                    id: state.posts.length,
-                    text: state.inputText,
+                    id: state.posts[state.posts.length - 1].id + 1,
+                    text: state.textInput,
                     date: new Date().toLocaleString(),
                     liked: false,
                     likesCount: 0,
                     user: {...action.currentUser},
                 }, ...state.posts,],
-                inputText: "",
+                textInput: "",
             }
         case CHANGE_INPUT:
             return {
                 ...state,
-                inputText: action.text,
+                textInput: action.text,
             }
         case DO_LIKE:
             return {
