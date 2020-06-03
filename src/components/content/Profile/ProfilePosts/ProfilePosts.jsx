@@ -23,12 +23,12 @@ class ProfilePosts extends React.Component {
             <div className={s.profilePosts}>
                 <div className={s.addPostContainer}>
                     <img src={this.props.currentUser.avaUrl} alt=""/>
-                    <textarea type="text" value={this.props.textInput} onChange={this.onChangeInput.bind(this)} placeholder="Hey, what's up?"
+                    <textarea type="text" value={this.props.inputText} onChange={this.onChangeInput.bind(this)} placeholder="Hey, what's up?"
                               ref={this.textareaElement}/>
                     <button onClick={this.onAddPost.bind(this)}>Post</button>
                 </div>
                 <div className={s.postsContainer}>
-                    {this.props.posts.map((p) => <Post post={p} doLike={this.props.doLike}
+                    {this.props.posts.map((p) => <Post key={p.id} post={p} doLike={this.props.doLike}
                                                   doUnlike={this.props.doUnlike}/>)}
                 </div>
             </div>

@@ -37,10 +37,11 @@ let initState = {
 const profileReducer = (state = initState, action) => {
     switch (action.type) {
         case ADD_POST:
+            debugger;
             return {
                 ...state,
                 posts: [{
-                    id: state.posts[state.posts.length - 1].id + 1,
+                    id: state.posts.length === 0 ? 0 : state.posts[0].id + 1,
                     text: state.textInput,
                     date: new Date().toLocaleString(),
                     liked: false,

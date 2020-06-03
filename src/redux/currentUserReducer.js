@@ -55,7 +55,13 @@ const currentUserReducer = (state = initState, action) => {
             }
         case SET_INTRO: {
             let newIntro = [...state.intro];
-            newIntro[action.id] = {id: action.id, title: action.title, text: action.text};
+            let index;
+            newIntro.forEach( (i, n) => {
+                if (i.id === action.id) {
+                    index = n;
+                }
+            });
+            newIntro[index] = {id: action.id, title: action.title, text: action.text};
             return {
                 ...state,
                 intro: newIntro,
@@ -63,11 +69,13 @@ const currentUserReducer = (state = initState, action) => {
         }
         case DELETE_INTRO: {
             let newIntro = [...state.intro];
-            newIntro.splice(newIntro.forEach( (i, index) => {
+            let index;
+            newIntro.forEach( (i, n) => {
                 if (i.id === action.id) {
-                    return index;
+                    index = n;
                 }
-            }), 1);
+            });
+            newIntro.splice(index, 1);
             return {
                 ...state,
                 intro: newIntro,

@@ -37,7 +37,6 @@ class SettingsContentProfile extends React.Component {
     }
 
     render() {
-        debugger;
         return (
             <div className={s.settingsContent}>
                 <img src="" alt=""/>
