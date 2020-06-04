@@ -6,8 +6,7 @@ const LOG_OUT = "LOG-OUT";
 const ADD_INTRO = "ADD-INTRO";
 const SET_INTRO = "SET-INTRO";
 const DELETE_INTRO = "DELETE-INTRO";
-const SAVE_CHANGES = "SAVE-CHANGES";
-const UPDATE_TEXT_INPUTS = "UPDATE-TEXT-INPUTS";
+const ADD_INTRO_UPDATE_FUNCTION = "ADD-INTRO-UPDATE-FUNCTION";
 
 let initState = {
     id: 0,
@@ -21,6 +20,7 @@ let initState = {
         {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
         {id: 2, title: "Best Friend", text: "Me"},
     ],
+    introUpdateFunctions: [],
 }
 
 const currentUserReducer = (state = initState, action) => {
@@ -51,12 +51,16 @@ const currentUserReducer = (state = initState, action) => {
         case ADD_INTRO:
             return {
                 ...state,
-                intro: [...state.intro, {id: state.intro.length === 0 ? 0 : state.intro[state.intro.length - 1].id + 1, title: action.title, text: action.text}],
+                intro: [...state.intro, {
+                    id: state.intro.length === 0 ? 0 : state.intro[state.intro.length - 1].id + 1,
+                    title: "Title",
+                    text: "Text"
+                }],
             }
         case SET_INTRO: {
             let newIntro = [...state.intro];
             let index;
-            newIntro.forEach( (i, n) => {
+            newIntro.forEach((i, n) => {
                 if (i.id === action.id) {
                     index = n;
                 }
@@ -68,23 +72,45 @@ const currentUserReducer = (state = initState, action) => {
             }
         }
         case DELETE_INTRO: {
-            let newIntro = [...state.intro];
-            let index;
-            newIntro.forEach( (i, n) => {
-                if (i.id === action.id) {
-                    index = n;
+            // Deleting intro update function
+            let newIntroUpdateFunctions = [...state.introUpdateFunctions];
+            let indexFunction = -1;
+            state.intro.map((s, i) => {
+                if (s.id === action.id) {
+                    indexFunction = i;
                 }
             });
-            newIntro.splice(index, 1);
+            newIntroUpdateFunctions.splice(indexFunction, 1);
+            // Deleting intro
+            let newIntro = [...state.intro];
+            let indexIntro;
+            newIntro.forEach((i, n) => {
+                if (i.id === action.id) {
+                    indexIntro = n;
+                }
+            });
+            newIntro.splice(indexIntro, 1);
             return {
                 ...state,
                 intro: newIntro,
-            }
+                introUpdateFunctions: [...state.introUpdateFunctions, {id: action.id, function_: action.function_}],
+            };
         }
-        case SAVE_CHANGES:
-            return state;
-        case UPDATE_TEXT_INPUTS:
-            return state;
+        case ADD_INTRO_UPDATE_FUNCTION:
+            let index = -1;
+            state.intro.map((s, i) => {
+                if (s.id === action.id) {
+                    index = i;
+                }
+            });
+            if (index === -1) {
+                return {
+                    ...state,
+                    introUpdateFunctions: [...state.introUpdateFunctions, {id: action.id, function_: action.function_}],
+                };
+            } else {
+                return state;
+            }
         default:
             return state;
     }
@@ -113,10 +139,8 @@ export const setCountryAC = (user, country) => ({
 export const logOutAC = () => ({
     type: LOG_OUT,
 });
-export const addIntroAC = (title, text) => ({
+export const addIntroAC = () => ({
     type: ADD_INTRO,
-    title: title,
-    text: text,
 });
 export const setIntroAC = (id, title, text) => ({
     type: SET_INTRO,
@@ -128,11 +152,10 @@ export const deleteIntroAC = id => ({
     type: DELETE_INTRO,
     id: id,
 });
-export const saveChangesAC = () => ({
-    type: SAVE_CHANGES,
-});
-export const updateTextInputs = () => ({
-    type: UPDATE_TEXT_INPUTS,
+export const addIntroUpdateFunctionAC = (id, function_) => ({
+    type: ADD_INTRO_UPDATE_FUNCTION,
+    id: id,
+    function_: function_,
 });
 
 export default currentUserReducer;

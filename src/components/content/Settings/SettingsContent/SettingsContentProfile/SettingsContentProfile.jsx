@@ -12,28 +12,27 @@ class SettingsContentProfile extends React.Component {
         //props.updateTextInputs();
     }
 
-    onSetName() {
+    setName() {
         this.props.setName(this.props.currentUser, this.inputName.current.value);
     }
-
-    onSetAva() {
+    setAva() {
         this.props.setAva(this.props.currentUser, this.inputAva.current.value);
     }
-
-    onSetCity() {
+    setCity() {
         this.props.setCity(this.props.currentUser, this.inputCity.current.value);
     }
-
-    onSetCountry() {
+    setCountry() {
         this.props.setCountry(this.props.currentUser, this.inputCountry.current.value);
     }
 
     onAddIntro() {
-        this.props.addIntro(`Title ${this.props.currentUser.intro.length}`, `Text ${this.props.currentUser.intro.length}`);
+        this.props.addIntro();
     }
-
     onSaveChanges() {
-        this.props.saveChanges();
+        this.setName();
+        this.setAva();
+        this.setCity();
+        this.setCountry();
     }
 
     render() {
@@ -45,22 +44,18 @@ class SettingsContentProfile extends React.Component {
                     <div className={s.item}>
                         <span>Name:</span>
                         <input type="text" defaultValue={this.props.currentUser.name} ref={this.inputName}/>
-                        <button onClick={this.onSetName.bind(this)}>Change</button>
                     </div>
                     <div className={s.item}>
                         <span>Avatar (URL):</span>
                         <input type="text" defaultValue={this.props.currentUser.avaUrl} ref={this.inputAva}/>
-                        <button onClick={this.onSetAva.bind(this)}>Change</button>
                     </div>
                     <div className={s.item}>
                         <span>City:</span>
                         <input type="text" defaultValue={this.props.currentUser.city} ref={this.inputCity}/>
-                        <button onClick={this.onSetCity.bind(this)}>Change</button>
                     </div>
                     <div className={s.item}>
                         <span>Country:</span>
                         <input type="text" defaultValue={this.props.currentUser.country} ref={this.inputCountry}/>
-                        <button onClick={this.onSetCountry.bind(this)}>Change</button>
                     </div>
                 </div>
                 <h2>Intro</h2>
