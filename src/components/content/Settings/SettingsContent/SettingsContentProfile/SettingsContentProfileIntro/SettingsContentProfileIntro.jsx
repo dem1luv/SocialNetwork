@@ -10,33 +10,47 @@ class SettingsContentProfileIntro extends React.Component {
         this.textInput = props.intro.text;
     }
 
+    componentDidMount() {
+        this.props.addIntroUpdateFunction(this.props.intro.id, this.getIntroData.bind(this));
+    }
+
     onChangeTitle(e) {
         this.titleInput = e.target.value;
         this.forceUpdate();
     }
+
     onChangeText(e) {
         this.textInput = e.target.value;
         this.forceUpdate();
     }
-    onSetIntro() {
-        this.props.setIntro(this.props.intro.id, this.inputTitle.current.value, this.inputText.current.value);
-    }
+
     onDeleteIntro() {
         this.props.deleteIntro(this.props.intro.id);
+    }
+
+    getIntroData() {
+        return {
+            id: this.props.intro.id,
+            title: this.inputTitle.current.value,
+            text: this.inputText.current.value
+        };
     }
 
     render() {
         return (
             <div className={s.intro}>
                 <div>
-                    <span>Title:</span>
-                    <input type="text" value={this.titleInput} onChange={this.onChangeTitle.bind(this)} ref={this.inputTitle}/>
+                    <div>
+                        <span>Title:</span>
+                        <input type="text" value={this.titleInput} onChange={this.onChangeTitle.bind(this)}
+                               ref={this.inputTitle} placeholder="Title"/>
+                    </div>
+                    <div>
+                        <span>Text:</span>
+                        <textarea value={this.textInput} onChange={this.onChangeText.bind(this)} ref={this.inputText}
+                                  placeholder="Text"/>
+                    </div>
                 </div>
-                <div>
-                    <span>Text:</span>
-                    <textarea value={this.textInput} onChange={this.onChangeText.bind(this)} ref={this.inputText}/>
-                </div>
-                <button onClick={this.onSetIntro.bind(this)}>Change</button>
                 <button onClick={this.onDeleteIntro.bind(this)}>Delete</button>
             </div>
         );

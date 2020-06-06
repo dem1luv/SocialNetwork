@@ -4,9 +4,11 @@ const SET_CITY = "SET-CITY";
 const SET_COUNTRY = "SET-COUNTRY";
 const LOG_OUT = "LOG-OUT";
 const ADD_INTRO = "ADD-INTRO";
-const SET_INTRO = "SET-INTRO";
 const DELETE_INTRO = "DELETE-INTRO";
 const ADD_INTRO_UPDATE_FUNCTION = "ADD-INTRO-UPDATE-FUNCTION";
+const UPDATE_INTROS = "UPDATE-INTROS";
+const REMOVE_ADDED_AND_REMOVED_INTROS = "REMOVE-ADDED-AND-REMOVED-INTROS";
+const RESTORE_REMOVED_INTROS = "RESTORE-REMOVED-INTROS";
 
 let initState = {
     id: 0,
@@ -20,6 +22,8 @@ let initState = {
         {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
         {id: 2, title: "Best Friend", text: "Me"},
     ],
+    addedIntro: [],
+    removedIntro: [],
     introUpdateFunctions: [],
 }
 
@@ -48,34 +52,34 @@ const currentUserReducer = (state = initState, action) => {
         case LOG_OUT:
             alert("ur logged out");
             return state;
-        case ADD_INTRO:
+        case ADD_INTRO: {
+            let id;
+            if (state.intro.length === 0 && state.addedIntro.length === 0) {
+                id = 0;
+            }
+            else if (state.addedIntro.length === 0) {
+                id = state.intro[state.intro.length - 1].id + 1;
+            }
+            else {
+                id = state.addedIntro[state.addedIntro.length - 1].id + 1;
+            }
+            debugger;
             return {
                 ...state,
-                intro: [...state.intro, {
-                    id: state.intro.length === 0 ? 0 : state.intro[state.intro.length - 1].id + 1,
+                addedIntro: [...state.addedIntro, {
+                    id: id,
                     title: "Title",
                     text: "Text"
                 }],
-            }
-        case SET_INTRO: {
-            let newIntro = [...state.intro];
-            let index;
-            newIntro.forEach((i, n) => {
-                if (i.id === action.id) {
-                    index = n;
-                }
-            });
-            newIntro[index] = {id: action.id, title: action.title, text: action.text};
-            return {
-                ...state,
-                intro: newIntro,
             }
         }
         case DELETE_INTRO: {
             // Deleting intro update function
             let newIntroUpdateFunctions = [...state.introUpdateFunctions];
             let indexFunction = -1;
-            state.intro.map((s, i) => {
+            let newRemovedIntro = [...state.removedIntro];
+            let removedIntroItem;
+            state.introUpdateFunctions.map((s, i) => {
                 if (s.id === action.id) {
                     indexFunction = i;
                 }
@@ -83,22 +87,40 @@ const currentUserReducer = (state = initState, action) => {
             newIntroUpdateFunctions.splice(indexFunction, 1);
             // Deleting intro
             let newIntro = [...state.intro];
-            let indexIntro;
+            let indexIntro = -1;
             newIntro.forEach((i, n) => {
                 if (i.id === action.id) {
                     indexIntro = n;
                 }
             });
-            newIntro.splice(indexIntro, 1);
+            if (indexIntro !== -1) {
+                removedIntroItem = newIntro.splice(indexIntro, 1);
+                newRemovedIntro.push(removedIntroItem[0]);
+            }
+            // Deleting added intro
+            let newAddedIntro = [...state.addedIntro];
+            let indexAddedIntro = -1;
+            newAddedIntro.forEach((i, n) => {
+                if (i.id === action.id) {
+                    indexAddedIntro = n;
+                }
+            });
+            if (indexAddedIntro !== -1) {
+                newAddedIntro.splice(indexAddedIntro, 1);
+            }
+            // return
+            debugger;
             return {
                 ...state,
                 intro: newIntro,
-                introUpdateFunctions: [...state.introUpdateFunctions, {id: action.id, function_: action.function_}],
+                introUpdateFunctions: newIntroUpdateFunctions,
+                addedIntro: newAddedIntro,
+                removedIntro: newRemovedIntro,
             };
         }
         case ADD_INTRO_UPDATE_FUNCTION:
             let index = -1;
-            state.intro.map((s, i) => {
+            state.introUpdateFunctions.map((s, i) => {
                 if (s.id === action.id) {
                     index = i;
                 }
@@ -109,8 +131,47 @@ const currentUserReducer = (state = initState, action) => {
                     introUpdateFunctions: [...state.introUpdateFunctions, {id: action.id, function_: action.function_}],
                 };
             } else {
-                return state;
+                let newIntroUpdateFunctions = [...state.introUpdateFunctions];
+                newIntroUpdateFunctions[index].function_ = action.function_;
+                return {
+                    ...state,
+                    introUpdateFunctions: newIntroUpdateFunctions,
+                };
             }
+        case UPDATE_INTROS: {
+            let newIntro = [];
+            state.introUpdateFunctions.forEach(i => {
+                newIntro.push(i.function_());
+            });
+            return {
+                ...state,
+                intro: newIntro,
+                addedIntro: [],
+            };
+        }
+        case REMOVE_ADDED_AND_REMOVED_INTROS:
+            return {
+                ...state,
+                addedIntro: [],
+                removedIntro: [],
+            };
+        case RESTORE_REMOVED_INTROS: {
+            let newIntro = [...state.intro, ...state.removedIntro];
+            newIntro.sort(function (a, b) {
+                if (a.id > b.id) {
+                    return 1;
+                }
+                if (a.id < b.id) {
+                    return -1;
+                }
+                return 0;
+            });
+            debugger;
+            return {
+                ...state,
+                intro: newIntro,
+            }
+        }
         default:
             return state;
     }
@@ -142,12 +203,6 @@ export const logOutAC = () => ({
 export const addIntroAC = () => ({
     type: ADD_INTRO,
 });
-export const setIntroAC = (id, title, text) => ({
-    type: SET_INTRO,
-    id: id,
-    title: title,
-    text: text,
-});
 export const deleteIntroAC = id => ({
     type: DELETE_INTRO,
     id: id,
@@ -156,6 +211,15 @@ export const addIntroUpdateFunctionAC = (id, function_) => ({
     type: ADD_INTRO_UPDATE_FUNCTION,
     id: id,
     function_: function_,
+});
+export const updateIntrosAC = () => ({
+    type: UPDATE_INTROS,
+});
+export const removeAddedAndRemovedIntrosAC = () => ({
+    type: REMOVE_ADDED_AND_REMOVED_INTROS,
+});
+export const restoreRemovedIntrosAC = () => ({
+    type: RESTORE_REMOVED_INTROS,
 });
 
 export default currentUserReducer;

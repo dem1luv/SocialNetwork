@@ -1,9 +1,21 @@
 .settingsContent h2 {
     margin: 0 0 20px 0;
+    font-size: 1.5em;
+    font-weight: 600;
+    padding: 0 0 25px 0;
+    line-height: 100%;
+    border-bottom: 1px solid #c1c1c133;
+    color: #fff;
+}
+.settingsContent h3 {
+    margin: 30px 0 20px 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 100%;
+    color: #fff;
 }
 .item {
     display: flex;
-    align-items: center;
     margin: 0 0 15px 0;
 }
 .item:last-child {
@@ -12,8 +24,12 @@
 .item span{
     display: inline-block;
     width: 200px;
+    line-height: 34px;
 }
 .item input {
     flex: 1 1 auto;
-    margin: 0 10px 0 0;
+    background-color: #1f2228;
+    color: #c1c1c1;
+    padding: 5px 10px;
+    border: none;
 }

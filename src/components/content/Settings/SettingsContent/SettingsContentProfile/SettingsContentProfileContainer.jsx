@@ -2,12 +2,16 @@ import React from "react";
 import {connect} from "react-redux";
 import SettingsContentProfile from "./SettingsContentProfile";
 import {
-    addIntroAC, deleteIntroAC,
+    addIntroAC,
+    addIntroUpdateFunctionAC,
+    deleteIntroAC,
+    removeAddedAndRemovedIntrosAC,
+    restoreRemovedIntrosAC,
     setAvaAC,
     setCityAC,
     setCountryAC,
-    setIntroAC,
     setNameAC,
+    updateIntrosAC,
 } from "../../../../../redux/currentUserReducer";
 
 const mapStateToProps = state => ({
@@ -30,12 +34,21 @@ const mapDispatchToProps = dispatch => ({
     addIntro: () => {
         dispatch(addIntroAC());
     },
-    setIntro: (id, title, text) => {
-        dispatch(setIntroAC(id, title, text));
-    },
     deleteIntro: id => {
         dispatch(deleteIntroAC(id));
     },
+    addIntroUpdateFunction: (id, function_) => {
+        dispatch(addIntroUpdateFunctionAC(id, function_));
+    },
+    updateIntros: () => {
+        dispatch(updateIntrosAC());
+    },
+    removeAddedAndRemovedIntros: () => {
+        dispatch(removeAddedAndRemovedIntrosAC());
+    },
+    restoreRemovedIntros: () => {
+        dispatch(restoreRemovedIntrosAC());
+    }
 });
 
 let SettingsContentProfileContainer = connect(mapStateToProps, mapDispatchToProps)(SettingsContentProfile);

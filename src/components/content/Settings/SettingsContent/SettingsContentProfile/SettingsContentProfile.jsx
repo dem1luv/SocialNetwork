@@ -12,27 +12,42 @@ class SettingsContentProfile extends React.Component {
         //props.updateTextInputs();
     }
 
+    componentWillUnmount() {
+        this.props.restoreRemovedIntros();
+        this.props.removeAddedAndRemovedIntros();
+    }
+
     setName() {
         this.props.setName(this.props.currentUser, this.inputName.current.value);
     }
+
     setAva() {
         this.props.setAva(this.props.currentUser, this.inputAva.current.value);
     }
+
     setCity() {
         this.props.setCity(this.props.currentUser, this.inputCity.current.value);
     }
+
     setCountry() {
         this.props.setCountry(this.props.currentUser, this.inputCountry.current.value);
+    }
+
+    updateIntros() {
+        this.props.updateIntros();
     }
 
     onAddIntro() {
         this.props.addIntro();
     }
+
     onSaveChanges() {
         this.setName();
         this.setAva();
         this.setCity();
         this.setCountry();
+        this.updateIntros();
+        this.props.removeAddedAndRemovedIntros();
     }
 
     render() {
@@ -43,27 +58,35 @@ class SettingsContentProfile extends React.Component {
                 <div>
                     <div className={s.item}>
                         <span>Name:</span>
-                        <input type="text" defaultValue={this.props.currentUser.name} ref={this.inputName}/>
+                        <input type="text" defaultValue={this.props.currentUser.name} ref={this.inputName}
+                               placeholder="Name"/>
                     </div>
                     <div className={s.item}>
                         <span>Avatar (URL):</span>
-                        <input type="text" defaultValue={this.props.currentUser.avaUrl} ref={this.inputAva}/>
+                        <input type="text" defaultValue={this.props.currentUser.avaUrl} ref={this.inputAva}
+                               placeholder="Avatar URL"/>
                     </div>
                     <div className={s.item}>
                         <span>City:</span>
-                        <input type="text" defaultValue={this.props.currentUser.city} ref={this.inputCity}/>
+                        <input type="text" defaultValue={this.props.currentUser.city} ref={this.inputCity}
+                               placeholder="City"/>
                     </div>
                     <div className={s.item}>
                         <span>Country:</span>
-                        <input type="text" defaultValue={this.props.currentUser.country} ref={this.inputCountry}/>
+                        <input type="text" defaultValue={this.props.currentUser.country} ref={this.inputCountry}
+                               placeholder="Country"/>
                     </div>
                 </div>
-                <h2>Intro</h2>
+                <h3>Intro</h3>
                 <div>
                     {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro key={i.id}
                                                                                         intro={i}
-                                                                                        setIntro={this.props.setIntro}
-                                                                                        deleteIntro={this.props.deleteIntro}/>)}
+                                                                                        deleteIntro={this.props.deleteIntro}
+                                                                                        addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
+                    {this.props.currentUser.addedIntro.map(i => <SettingsContentProfileIntro key={i.id}
+                                                                                             intro={i}
+                                                                                             deleteIntro={this.props.deleteIntro}
+                                                                                             addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
                     <button onClick={this.onAddIntro.bind(this)}>Add Intro</button>
                 </div>
                 <button onClick={this.onSaveChanges.bind(this)}>Save Changes</button>
