@@ -196,7 +196,7 @@ export const setAvaAC = (user, avaUrl) => ({
 export const setBgAC = (user, bgUrl) => ({
     type: SET_BG,
     user: user,
-    avaUrl: bgUrl,
+    bgUrl: bgUrl,
 });
 export const setCityAC = (user, city) => ({
     type: SET_CITY,
