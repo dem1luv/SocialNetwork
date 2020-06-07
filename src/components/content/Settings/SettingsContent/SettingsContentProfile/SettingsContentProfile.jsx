@@ -79,6 +79,7 @@ class SettingsContentProfile extends React.Component {
                 </div>
                 <h3>Intro</h3>
                 <div>
+                    <div>
                     {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro key={i.id}
                                                                                         intro={i}
                                                                                         deleteIntro={this.props.deleteIntro}
@@ -87,9 +88,10 @@ class SettingsContentProfile extends React.Component {
                                                                                              intro={i}
                                                                                              deleteIntro={this.props.deleteIntro}
                                                                                              addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
-                    <button onClick={this.onAddIntro.bind(this)}>Add Intro</button>
+                    </div>
+                    <button onClick={this.onAddIntro.bind(this)} className={s.buttonAddIntro}>Add Intro</button>
                 </div>
-                <button onClick={this.onSaveChanges.bind(this)}>Save Changes</button>
+                <button onClick={this.onSaveChanges.bind(this)} className={s.buttonSaveChanges}>Save Changes</button>
             </div>
         );
     }

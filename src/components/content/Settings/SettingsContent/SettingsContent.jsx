@@ -8,11 +8,8 @@ class SettingsContent extends React.Component {
     render() {
         return (
             <div className={s.settingsContent}>
-                <img src="" alt=""/>
-                <span>
                 <Route path="/settings/profile" render={() => <SettingsContentProfileContainer/>}/>
                 <Route path="/settings/general" render={() => <SettingsContentGeneralContainer/>}/>
-            </span>
             </div>
         );
     }

@@ -53,21 +53,21 @@ const currentUserReducer = (state = initState, action) => {
             alert("ur logged out");
             return state;
         case ADD_INTRO: {
-            let id;
-            if (state.intro.length === 0 && state.addedIntro.length === 0) {
-                id = 0;
-            }
-            else if (state.addedIntro.length === 0) {
-                id = state.intro[state.intro.length - 1].id + 1;
-            }
-            else {
-                id = state.addedIntro[state.addedIntro.length - 1].id + 1;
-            }
+            let allIntro = [...state.intro, ...state.addedIntro, ...state.removedIntro];
+            allIntro.sort(function (a, b) {
+                if (a.id > b.id) {
+                    return 1;
+                }
+                if (a.id < b.id) {
+                    return -1;
+                }
+                return 0;
+            });
             debugger;
             return {
                 ...state,
                 addedIntro: [...state.addedIntro, {
-                    id: id,
+                    id: allIntro.length === 0 ? 0 : allIntro[allIntro.length - 1].id + 1,
                     title: "Title",
                     text: "Text"
                 }],
@@ -76,7 +76,7 @@ const currentUserReducer = (state = initState, action) => {
         case DELETE_INTRO: {
             // Deleting intro update function
             let newIntroUpdateFunctions = [...state.introUpdateFunctions];
-            let indexFunction = -1;
+            let indexFunction;
             let newRemovedIntro = [...state.removedIntro];
             let removedIntroItem;
             state.introUpdateFunctions.map((s, i) => {
@@ -140,13 +140,13 @@ const currentUserReducer = (state = initState, action) => {
             }
         case UPDATE_INTROS: {
             let newIntro = [];
+            debugger;
             state.introUpdateFunctions.forEach(i => {
                 newIntro.push(i.function_());
             });
             return {
                 ...state,
                 intro: newIntro,
-                addedIntro: [],
             };
         }
         case REMOVE_ADDED_AND_REMOVED_INTROS:
@@ -154,6 +154,7 @@ const currentUserReducer = (state = initState, action) => {
                 ...state,
                 addedIntro: [],
                 removedIntro: [],
+                introUpdateFunctions: [],
             };
         case RESTORE_REMOVED_INTROS: {
             let newIntro = [...state.intro, ...state.removedIntro];
@@ -166,7 +167,6 @@ const currentUserReducer = (state = initState, action) => {
                 }
                 return 0;
             });
-            debugger;
             return {
                 ...state,
                 intro: newIntro,
