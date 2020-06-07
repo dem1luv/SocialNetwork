@@ -7,7 +7,7 @@ import {
     deleteIntroAC,
     removeAddedAndRemovedIntrosAC,
     restoreRemovedIntrosAC,
-    setAvaAC,
+    setAvaAC, setBgAC,
     setCityAC,
     setCountryAC,
     setNameAC,
@@ -24,6 +24,9 @@ const mapDispatchToProps = dispatch => ({
     },
     setAva: (currentUser, avaUrl) => {
         dispatch(setAvaAC(currentUser, avaUrl));
+    },
+    setBg: (currentUser, bgUrl) => {
+        dispatch(setBgAC(currentUser, bgUrl));
     },
     setCity: (currentUser, city) => {
         dispatch(setCityAC(currentUser, city));

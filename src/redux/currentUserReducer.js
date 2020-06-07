@@ -1,5 +1,6 @@
 const SET_NAME = "SET-NAME";
 const SET_AVA = "SET-AVA";
+const SET_BG = "SET-BG";
 const SET_CITY = "SET-CITY";
 const SET_COUNTRY = "SET-COUNTRY";
 const LOG_OUT = "LOG-OUT";
@@ -38,6 +39,11 @@ const currentUserReducer = (state = initState, action) => {
             return {
                 ...state,
                 avaUrl: action.avaUrl,
+            }
+        case SET_BG:
+            return {
+                ...state,
+                bgUrl: action.bgUrl,
             }
         case SET_CITY:
             return {
@@ -186,6 +192,11 @@ export const setAvaAC = (user, avaUrl) => ({
     type: SET_AVA,
     user: user,
     avaUrl: avaUrl,
+});
+export const setBgAC = (user, bgUrl) => ({
+    type: SET_BG,
+    user: user,
+    avaUrl: bgUrl,
 });
 export const setCityAC = (user, city) => ({
     type: SET_CITY,

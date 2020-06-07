@@ -7,6 +7,7 @@ class SettingsContentProfile extends React.Component {
         super(props);
         this.inputName = React.createRef();
         this.inputAva = React.createRef();
+        this.inputBg = React.createRef();
         this.inputCity = React.createRef();
         this.inputCountry = React.createRef();
         //props.updateTextInputs();
@@ -23,6 +24,10 @@ class SettingsContentProfile extends React.Component {
 
     setAva() {
         this.props.setAva(this.props.currentUser, this.inputAva.current.value);
+    }
+
+    setBg() {
+        this.props.setBg(this.props.currentUser, this.inputBg.current.value);
     }
 
     setCity() {
@@ -44,6 +49,7 @@ class SettingsContentProfile extends React.Component {
     onSaveChanges() {
         this.setName();
         this.setAva();
+        this.setBg();
         this.setCity();
         this.setCountry();
         this.updateIntros();
@@ -67,6 +73,11 @@ class SettingsContentProfile extends React.Component {
                                placeholder="Avatar URL"/>
                     </div>
                     <div className={s.item}>
+                        <span>Background (URL):</span>
+                        <input type="text" defaultValue={this.props.currentUser.bgUrl} ref={this.inputBg}
+                               placeholder="Background URL"/>
+                    </div>
+                    <div className={s.item}>
                         <span>City:</span>
                         <input type="text" defaultValue={this.props.currentUser.city} ref={this.inputCity}
                                placeholder="City"/>
@@ -80,14 +91,14 @@ class SettingsContentProfile extends React.Component {
                 <h3>Intro</h3>
                 <div>
                     <div>
-                    {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro key={i.id}
-                                                                                        intro={i}
-                                                                                        deleteIntro={this.props.deleteIntro}
-                                                                                        addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
-                    {this.props.currentUser.addedIntro.map(i => <SettingsContentProfileIntro key={i.id}
-                                                                                             intro={i}
-                                                                                             deleteIntro={this.props.deleteIntro}
-                                                                                             addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
+                        {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro key={i.id}
+                                                                                            intro={i}
+                                                                                            deleteIntro={this.props.deleteIntro}
+                                                                                            addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
+                        {this.props.currentUser.addedIntro.map(i => <SettingsContentProfileIntro key={i.id}
+                                                                                                 intro={i}
+                                                                                                 deleteIntro={this.props.deleteIntro}
+                                                                                                 addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
                     </div>
                     <button onClick={this.onAddIntro.bind(this)} className={s.buttonAddIntro}>Add Intro</button>
                 </div>
