@@ -3,15 +3,11 @@ import {connect} from "react-redux";
 import SettingsContentProfile from "./SettingsContentProfile";
 import {
     addIntroAC,
-    addIntroUpdateFunctionAC,
-    deleteIntroAC,
-    removeAddedAndRemovedIntrosAC,
-    restoreRemovedIntrosAC,
-    setAvaAC, setBgAC,
-    setCityAC,
-    setCountryAC,
-    setNameAC,
-    updateIntrosAC,
+    deleteIntroAC, resetChangesAC,
+    changeAvaAC, changeBgAC,
+    changeCityAC,
+    changeCountryAC,
+    changeNameAC, saveChangesAC, changeIntroTitleAC, changeIntroTextAC,
 } from "../../../../../redux/currentUserReducer";
 
 const mapStateToProps = state => ({
@@ -19,39 +15,39 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setName: (currentUser, name) => {
-        dispatch(setNameAC(currentUser, name));
+    changeName: (currentUser, name) => {
+        dispatch(changeNameAC(currentUser, name));
     },
-    setAva: (currentUser, avaUrl) => {
-        dispatch(setAvaAC(currentUser, avaUrl));
+    changeAva: (currentUser, avaUrl) => {
+        dispatch(changeAvaAC(currentUser, avaUrl));
     },
-    setBg: (currentUser, bgUrl) => {
-        dispatch(setBgAC(currentUser, bgUrl));
+    changeBg: (currentUser, bgUrl) => {
+        dispatch(changeBgAC(currentUser, bgUrl));
     },
-    setCity: (currentUser, city) => {
-        dispatch(setCityAC(currentUser, city));
+    changeCity: (currentUser, city) => {
+        dispatch(changeCityAC(currentUser, city));
     },
-    setCountry: (currentUser, country) => {
-        dispatch(setCountryAC(currentUser, country));
+    changeCountry: (currentUser, country) => {
+        dispatch(changeCountryAC(currentUser, country));
     },
     addIntro: () => {
         dispatch(addIntroAC());
     },
+    changeIntroTitle: (introId, title) => {
+        dispatch(changeIntroTitleAC(introId, title));
+    },
+    changeIntroText: (introId, text) => {
+        dispatch(changeIntroTextAC(introId, text));
+    },
     deleteIntro: id => {
         dispatch(deleteIntroAC(id));
     },
-    addIntroUpdateFunction: (id, function_) => {
-        dispatch(addIntroUpdateFunctionAC(id, function_));
+    saveChanges: () => {
+        dispatch(saveChangesAC());
     },
-    updateIntros: () => {
-        dispatch(updateIntrosAC());
+    resetChanges: () => {
+        dispatch(resetChangesAC());
     },
-    removeAddedAndRemovedIntros: () => {
-        dispatch(removeAddedAndRemovedIntrosAC());
-    },
-    restoreRemovedIntros: () => {
-        dispatch(restoreRemovedIntrosAC());
-    }
 });
 
 let SettingsContentProfileContainer = connect(mapStateToProps, mapDispatchToProps)(SettingsContentProfile);

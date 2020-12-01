@@ -1,15 +1,15 @@
-const SET_NAME = "SET-NAME";
-const SET_AVA = "SET-AVA";
-const SET_BG = "SET-BG";
-const SET_CITY = "SET-CITY";
-const SET_COUNTRY = "SET-COUNTRY";
+const CHANGE_NAME = "CHANGE-NAME";
+const CHANGE_AVA = "CHANGE-AVA";
+const CHANGE_BG = "CHANGE-BG";
+const CHANGE_CITY = "CHANGE-CITY";
+const CHANGE_COUNTRY = "CHANGE-COUNTRY";
 const LOG_OUT = "LOG-OUT";
 const ADD_INTRO = "ADD-INTRO";
+const CHANGE_INTRO_TITLE = "CHANGE-INTRO-TITLE";
+const CHANGE_INTRO_TEXT = "CHANGE-INTRO-TEXT";
 const DELETE_INTRO = "DELETE-INTRO";
-const ADD_INTRO_UPDATE_FUNCTION = "ADD-INTRO-UPDATE-FUNCTION";
-const UPDATE_INTROS = "UPDATE-INTROS";
-const REMOVE_ADDED_AND_REMOVED_INTROS = "REMOVE-ADDED-AND-REMOVED-INTROS";
-const RESTORE_REMOVED_INTROS = "RESTORE-REMOVED-INTROS";
+const SAVE_CHANGES = "SAVE-CHANGES";
+const RESET_CHANGES = "RESET-CHANGES";
 
 let initState = {
     id: 0,
@@ -23,188 +23,161 @@ let initState = {
         {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
         {id: 2, title: "Best Friend", text: "Me"},
     ],
-    addedIntro: [],
-    removedIntro: [],
-    introUpdateFunctions: [],
+    newData: {
+        avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
+        bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
+        name: "Dmytry Demjanenko",
+        city: "Sumy",
+        country: "Ukraine",
+        intro: [
+            {id: 0, title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
+            {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
+            {id: 2, title: "Best Friend", text: "Me"},
+        ],
+    },
 }
 
 const currentUserReducer = (state = initState, action) => {
     switch (action.type) {
-        case SET_NAME:
+        case CHANGE_NAME:
             return {
                 ...state,
-                name: action.name,
+                newData: {
+                    ...state.newData,
+                    name: action.name,
+                },
             }
-        case SET_AVA:
+        case CHANGE_AVA:
             return {
                 ...state,
-                avaUrl: action.avaUrl,
+                newData: {
+                    ...state.newData,
+                    avaUrl: action.avaUrl,
+                }
             }
-        case SET_BG:
+        case CHANGE_BG:
             return {
                 ...state,
-                bgUrl: action.bgUrl,
+                newData: {
+                    ...state.newData,
+                    bgUrl: action.bgUrl,
+                },
             }
-        case SET_CITY:
+        case CHANGE_CITY:
             return {
                 ...state,
-                city: action.city,
+                newData: {
+                    ...state.newData,
+                    city: action.city,
+                },
             }
-        case SET_COUNTRY:
+        case CHANGE_COUNTRY:
             return {
                 ...state,
-                country: action.country,
+                newData: {
+                    ...state.newData,
+                    country: action.country,
+                },
             }
         case LOG_OUT:
             alert("ur logged out");
             return state;
         case ADD_INTRO: {
-            let allIntro = [...state.intro, ...state.addedIntro, ...state.removedIntro];
-            allIntro.sort(function (a, b) {
-                if (a.id > b.id) {
-                    return 1;
-                }
-                if (a.id < b.id) {
-                    return -1;
-                }
-                return 0;
-            });
-            debugger;
             return {
                 ...state,
-                addedIntro: [...state.addedIntro, {
-                    id: allIntro.length === 0 ? 0 : allIntro[allIntro.length - 1].id + 1,
-                    title: "Title",
-                    text: "Text"
-                }],
+                newData: {
+                    ...state.newData,
+                    intro: [
+                        ...state.newData.intro,
+                        {
+                            id: state.newData.intro.length === 0 ? 0 : state.newData.intro[state.newData.intro.length - 1].id + 1,
+                            title: "Title",
+                            text: "Text",
+                        },
+                    ],
+                },
             }
+        }
+        case CHANGE_INTRO_TITLE: {
+            let newState = {
+                ...state,
+                newData: {
+                    ...state.newData,
+                    intro: [...state.newData.intro],
+                },
+            };
+            newState.newData.intro[action.id].title = action.title;
+            return newState;
+        }
+        case CHANGE_INTRO_TEXT: {
+            let newState = {
+                ...state,
+                newData: {
+                    ...state.newData,
+                    intro: [...state.newData.intro],
+                },
+            };
+            newState.newData.intro[action.id].text = action.text;
+            return newState;
         }
         case DELETE_INTRO: {
-            // Deleting intro update function
-            let newIntroUpdateFunctions = [...state.introUpdateFunctions];
-            let indexFunction;
-            let newRemovedIntro = [...state.removedIntro];
-            let removedIntroItem;
-            state.introUpdateFunctions.map((s, i) => {
-                if (s.id === action.id) {
-                    indexFunction = i;
-                }
-            });
-            newIntroUpdateFunctions.splice(indexFunction, 1);
-            // Deleting intro
-            let newIntro = [...state.intro];
-            let indexIntro = -1;
-            newIntro.forEach((i, n) => {
-                if (i.id === action.id) {
-                    indexIntro = n;
-                }
-            });
-            if (indexIntro !== -1) {
-                removedIntroItem = newIntro.splice(indexIntro, 1);
-                newRemovedIntro.push(removedIntroItem[0]);
-            }
-            // Deleting added intro
-            let newAddedIntro = [...state.addedIntro];
-            let indexAddedIntro = -1;
-            newAddedIntro.forEach((i, n) => {
-                if (i.id === action.id) {
-                    indexAddedIntro = n;
-                }
-            });
-            if (indexAddedIntro !== -1) {
-                newAddedIntro.splice(indexAddedIntro, 1);
-            }
-            // return
-            debugger;
-            return {
+            let newState = {
                 ...state,
-                intro: newIntro,
-                introUpdateFunctions: newIntroUpdateFunctions,
-                addedIntro: newAddedIntro,
-                removedIntro: newRemovedIntro,
+                newData: {
+                    ...state.newData,
+                    intro: [...state.newData.intro],
+                },
             };
+            newState.newData.intro = newState.newData.intro.filter(item => item.id !== action.id);
+            return newState;
         }
-        case ADD_INTRO_UPDATE_FUNCTION:
-            let index = -1;
-            state.introUpdateFunctions.map((s, i) => {
-                if (s.id === action.id) {
-                    index = i;
-                }
-            });
-            if (index === -1) {
-                return {
-                    ...state,
-                    introUpdateFunctions: [...state.introUpdateFunctions, {id: action.id, function_: action.function_}],
-                };
-            } else {
-                let newIntroUpdateFunctions = [...state.introUpdateFunctions];
-                newIntroUpdateFunctions[index].function_ = action.function_;
-                return {
-                    ...state,
-                    introUpdateFunctions: newIntroUpdateFunctions,
-                };
-            }
-        case UPDATE_INTROS: {
-            let newIntro = [];
-            debugger;
-            state.introUpdateFunctions.forEach(i => {
-                newIntro.push(i.function_());
-            });
+        case SAVE_CHANGES: {
             return {
                 ...state,
-                intro: newIntro,
-            };
+                ...state.newData,
+                intro: [...state.newData.intro],
+            }
         }
-        case REMOVE_ADDED_AND_REMOVED_INTROS:
+        case RESET_CHANGES: {
             return {
                 ...state,
-                addedIntro: [],
-                removedIntro: [],
-                introUpdateFunctions: [],
+                newData: {
+                    avaUrl: state.avaUrl,
+                    bgUrl: state.bgUrl,
+                    name: state.name,
+                    city: state.city,
+                    country: state.country,
+                    intro: [...state.intro],
+                },
             };
-        case RESTORE_REMOVED_INTROS: {
-            let newIntro = [...state.intro, ...state.removedIntro];
-            newIntro.sort(function (a, b) {
-                if (a.id > b.id) {
-                    return 1;
-                }
-                if (a.id < b.id) {
-                    return -1;
-                }
-                return 0;
-            });
-            return {
-                ...state,
-                intro: newIntro,
-            }
         }
         default:
             return state;
     }
 }
 
-export const setNameAC = (user, name) => ({
-    type: SET_NAME,
+export const changeNameAC = (user, name) => ({
+    type: CHANGE_NAME,
     user: user,
     name: name,
 });
-export const setAvaAC = (user, avaUrl) => ({
-    type: SET_AVA,
+export const changeAvaAC = (user, avaUrl) => ({
+    type: CHANGE_AVA,
     user: user,
     avaUrl: avaUrl,
 });
-export const setBgAC = (user, bgUrl) => ({
-    type: SET_BG,
+export const changeBgAC = (user, bgUrl) => ({
+    type: CHANGE_BG,
     user: user,
     bgUrl: bgUrl,
 });
-export const setCityAC = (user, city) => ({
-    type: SET_CITY,
+export const changeCityAC = (user, city) => ({
+    type: CHANGE_CITY,
     user: user,
     city: city,
 });
-export const setCountryAC = (user, country) => ({
-    type: SET_COUNTRY,
+export const changeCountryAC = (user, country) => ({
+    type: CHANGE_COUNTRY,
     user: user,
     country: country,
 });
@@ -214,23 +187,25 @@ export const logOutAC = () => ({
 export const addIntroAC = () => ({
     type: ADD_INTRO,
 });
+export const changeIntroTitleAC = (introId, title) => ({
+    type: CHANGE_INTRO_TITLE,
+    id: introId,
+    title: title,
+});
+export const changeIntroTextAC = (introId, text) => ({
+    type: CHANGE_INTRO_TEXT,
+    id: introId,
+    text: text,
+});
 export const deleteIntroAC = id => ({
     type: DELETE_INTRO,
     id: id,
 });
-export const addIntroUpdateFunctionAC = (id, function_) => ({
-    type: ADD_INTRO_UPDATE_FUNCTION,
-    id: id,
-    function_: function_,
+export const saveChangesAC = () => ({
+    type: SAVE_CHANGES,
 });
-export const updateIntrosAC = () => ({
-    type: UPDATE_INTROS,
-});
-export const removeAddedAndRemovedIntrosAC = () => ({
-    type: REMOVE_ADDED_AND_REMOVED_INTROS,
-});
-export const restoreRemovedIntrosAC = () => ({
-    type: RESTORE_REMOVED_INTROS,
+export const resetChangesAC = () => ({
+    type: RESET_CHANGES,
 });
 
 export default currentUserReducer;

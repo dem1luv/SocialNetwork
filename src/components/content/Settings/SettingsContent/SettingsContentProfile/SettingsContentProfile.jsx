@@ -5,41 +5,30 @@ import SettingsContentProfileIntro from "./SettingsContentProfileIntro/SettingsC
 class SettingsContentProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.inputName = React.createRef();
-        this.inputAva = React.createRef();
-        this.inputBg = React.createRef();
-        this.inputCity = React.createRef();
-        this.inputCountry = React.createRef();
-        //props.updateTextInputs();
     }
 
     componentWillUnmount() {
-        this.props.restoreRemovedIntros();
-        this.props.removeAddedAndRemovedIntros();
+        this.props.resetChanges();
     }
 
-    setName() {
-        this.props.setName(this.props.currentUser, this.inputName.current.value);
+    onChangeName(e) {
+        this.props.changeName(this.props.currentUser, e.target.value);
     }
 
-    setAva() {
-        this.props.setAva(this.props.currentUser, this.inputAva.current.value);
+    onChangeAva(e) {
+        this.props.changeAva(this.props.currentUser, e.target.value);
     }
 
-    setBg() {
-        this.props.setBg(this.props.currentUser, this.inputBg.current.value);
+    onChangeBg(e) {
+        this.props.changeBg(this.props.currentUser, e.target.value);
     }
 
-    setCity() {
-        this.props.setCity(this.props.currentUser, this.inputCity.current.value);
+    onChangeCity(e) {
+        this.props.changeCity(this.props.currentUser, e.target.value);
     }
 
-    setCountry() {
-        this.props.setCountry(this.props.currentUser, this.inputCountry.current.value);
-    }
-
-    updateIntros() {
-        this.props.updateIntros();
+    onChangeCountry(e) {
+        this.props.changeCountry(this.props.currentUser, e.target.value);
     }
 
     onAddIntro() {
@@ -47,13 +36,7 @@ class SettingsContentProfile extends React.Component {
     }
 
     onSaveChanges() {
-        this.setName();
-        this.setAva();
-        this.setBg();
-        this.setCity();
-        this.setCountry();
-        this.updateIntros();
-        this.props.removeAddedAndRemovedIntros();
+        this.props.saveChanges();
     }
 
     render() {
@@ -64,41 +47,43 @@ class SettingsContentProfile extends React.Component {
                 <div>
                     <div className={s.item}>
                         <span>Name:</span>
-                        <input type="text" defaultValue={this.props.currentUser.name} ref={this.inputName}
+                        <input type="text" value={this.props.currentUser.newData.name}
+                               onChange={this.onChangeName.bind(this)}
                                placeholder="Name"/>
                     </div>
                     <div className={s.item}>
                         <span>Avatar (URL):</span>
-                        <input type="text" defaultValue={this.props.currentUser.avaUrl} ref={this.inputAva}
+                        <input type="text" value={this.props.currentUser.newData.avaUrl}
+                               onChange={this.onChangeAva.bind(this)}
                                placeholder="Avatar URL"/>
                     </div>
                     <div className={s.item}>
                         <span>Background (URL):</span>
-                        <input type="text" defaultValue={this.props.currentUser.bgUrl} ref={this.inputBg}
+                        <input type="text" value={this.props.currentUser.newData.bgUrl}
+                               onChange={this.onChangeBg.bind(this)}
                                placeholder="Background URL"/>
                     </div>
                     <div className={s.item}>
                         <span>City:</span>
-                        <input type="text" defaultValue={this.props.currentUser.city} ref={this.inputCity}
+                        <input type="text" value={this.props.currentUser.newData.city}
+                               onChange={this.onChangeCity.bind(this)}
                                placeholder="City"/>
                     </div>
                     <div className={s.item}>
                         <span>Country:</span>
-                        <input type="text" defaultValue={this.props.currentUser.country} ref={this.inputCountry}
+                        <input type="text" value={this.props.currentUser.newData.country}
+                               onChange={this.onChangeCountry.bind(this)}
                                placeholder="Country"/>
                     </div>
                 </div>
                 <h3>Intro</h3>
                 <div>
                     <div>
-                        {this.props.currentUser.intro.map(i => <SettingsContentProfileIntro key={i.id}
-                                                                                            intro={i}
-                                                                                            deleteIntro={this.props.deleteIntro}
-                                                                                            addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
-                        {this.props.currentUser.addedIntro.map(i => <SettingsContentProfileIntro key={i.id}
-                                                                                                 intro={i}
-                                                                                                 deleteIntro={this.props.deleteIntro}
-                                                                                                 addIntroUpdateFunction={this.props.addIntroUpdateFunction}/>)}
+                        {this.props.currentUser.newData.intro.map(i => <SettingsContentProfileIntro key={i.id}
+                                                                                                    intro={i}
+                                                                                                    changeIntroTitle={this.props.changeIntroTitle}
+                                                                                                    changeIntroText={this.props.changeIntroText}
+                                                                                                    deleteIntro={this.props.deleteIntro}/>)}
                     </div>
                     <button onClick={this.onAddIntro.bind(this)} className={s.buttonAddIntro}>Add Intro</button>
                 </div>
