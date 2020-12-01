@@ -106,7 +106,13 @@ const currentUserReducer = (state = initState, action) => {
                     intro: [...state.newData.intro],
                 },
             };
-            newState.newData.intro[action.id].title = action.title;
+            let introIndex = 0;
+            newState.newData.intro.map(item => {
+                if (item.id === action.id) {
+                    introIndex = newState.newData.intro.indexOf(item);
+                }
+            });
+            newState.newData.intro[introIndex].title = action.title;
             return newState;
         }
         case CHANGE_INTRO_TEXT: {
@@ -117,7 +123,13 @@ const currentUserReducer = (state = initState, action) => {
                     intro: [...state.newData.intro],
                 },
             };
-            newState.newData.intro[action.id].text = action.text;
+            let introIndex = 0;
+            newState.newData.intro.map(item => {
+                if (item.id === action.id) {
+                    introIndex = newState.newData.intro.indexOf(item);
+                }
+            });
+            newState.newData.intro[introIndex].text = action.text;
             return newState;
         }
         case DELETE_INTRO: {
