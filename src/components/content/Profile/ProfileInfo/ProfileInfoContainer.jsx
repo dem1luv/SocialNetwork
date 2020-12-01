@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 
 const mapStateToProps = state => ({
-    user: state.profilePage.user,
+    user: state.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({});
