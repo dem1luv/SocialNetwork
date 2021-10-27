@@ -1,0 +1,47 @@
+{
+  "homepage": "http://LyaShket.github.io/SocialNetwork",
+  "name": "03-social-network",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/helper-builder-react-jsx-experimental": "^7.12.11",
+    "@babel/helper-define-map": "^7.15.4",
+    "@babel/helper-regex": "^7.10.5",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "babel": "^6.23.0",
+    "gh-pages": "^3.2.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0"
+  }
+}

@@ -1,0 +1,6 @@
+.settings {
+    margin: 30px;
+    display: grid;
+    grid-template: "content navbar";
+    grid-template-columns: 10fr auto;
+}

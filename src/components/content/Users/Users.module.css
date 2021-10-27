@@ -1,0 +1,30 @@
+.usersContent {
+    background-color: #282c34;
+    padding: 25px;
+    margin: 30px;
+    min-height: calc(100vh - 110px);
+}
+
+.paginationList {
+    margin: 0 0 20px 0;
+}
+
+.paginationButton {
+    background: none;
+    margin: 0 10px 0 0;
+    border: 2px solid #1f2228;
+    color: #c1c1c1;
+    font-size: 18px;
+}
+
+.paginationButton.current {
+    font-weight: bold;
+    color: #1f2228;
+    background: #c1c1c1;
+}
+
+.usersList {
+    display: grid;
+    max-width: 60%;
+    grid-template-columns: repeat(4, 25%);
+}
