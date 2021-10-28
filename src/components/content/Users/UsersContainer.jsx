@@ -4,11 +4,16 @@ import Users from "./Users";
 import {setUsersAC, toggleFetchingAC} from "../../../redux/usersReducer";
 import {setUsersTotalCountAC} from "../../../redux/usersReducer";
 import {setCurrentPageAC} from "../../../redux/usersReducer";
+import axios from "axios";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleFetching(true);
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=${this.props.usersCount}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=${this.props.usersCount}`, {
+            headers: {
+                'API-KEY': '9c9b74e2-793a-4cf9-ba05-839ccee0a0b5'
+            }
+        })
             .then(response => response.json())
             .then(json => {
                 this.props.toggleFetching(false);
@@ -20,7 +25,11 @@ class UsersContainer extends React.Component {
 
     onSetCurrentPage(page) {
         this.props.toggleFetching(true);
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`, {
+            headers: {
+                'API-KEY': '9c9b74e2-793a-4cf9-ba05-839ccee0a0b5'
+            }
+        })
             .then(response => response.json())
             .then(json => {
                 this.props.toggleFetching(false);
