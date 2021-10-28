@@ -11,14 +11,13 @@ class UsersContainer extends React.Component {
         this.props.toggleFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=${this.props.usersCount}`, {
             headers: {
-                'API-KEY': '9c9b74e2-793a-4cf9-ba05-839ccee0a0b5'
+                'API-KEY': 'ba3b16ba-c3a0-404f-acd8-1f2bd9f7b405'
             }
         })
-            .then(response => response.json())
-            .then(json => {
+            .then(response => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(json.items);
-                this.props.setUsersTotalCount(json.totalCount);
+                this.props.setUsers(response.data.items);
+                this.props.setUsersTotalCount(response.data.totalCount);
             })
             .catch(() => this.props.toggleFetching(false));
     }
@@ -27,13 +26,12 @@ class UsersContainer extends React.Component {
         this.props.toggleFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`, {
             headers: {
-                'API-KEY': '9c9b74e2-793a-4cf9-ba05-839ccee0a0b5'
+                'API-KEY': 'ba3b16ba-c3a0-404f-acd8-1f2bd9f7b405'
             }
         })
-            .then(response => response.json())
-            .then(json => {
+            .then(response => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(json.items);
+                this.props.setUsers(response.data.items);
                 this.props.setCurrentPage(page);
             })
             .catch(() => this.props.toggleFetching(false));

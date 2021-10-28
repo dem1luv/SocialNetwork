@@ -15,24 +15,22 @@ let initState = {
     id: 0,
     avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
     bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
-    name: "Dmytry Demjanenko",
+    name: "Dmitriy Demyanenko",
     city: "Sumy",
     country: "Ukraine",
     intro: [
-        {id: 0, title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
+        {id: 0, title: "About me", text: "Frontend developer 16 y.o. 😉"},
         {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
-        {id: 2, title: "Best Friend", text: "Me"},
     ],
     newData: {
         avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
         bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
-        name: "Dmytry Demjanenko",
+        name: "Dmitriy Demyanenko",
         city: "Sumy",
         country: "Ukraine",
         intro: [
-            {id: 0, title: "About me", text: "Hi, my name is Dmytro and I'm 15 old"},
+            {id: 0, title: "About me", text: "Frontend developer 16 y.o. 😉"},
             {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
-            {id: 2, title: "Best Friend", text: "Me"},
         ],
     },
 }

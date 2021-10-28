@@ -12,7 +12,7 @@ let initState = {
             user: {
                 id: 0,
                 avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
-                name: "Dmytry Demjanenko",
+                name: "Dmitriy Demyanenko",
             }
         },
     ],
