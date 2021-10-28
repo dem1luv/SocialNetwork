@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SocialNetwork/static/css/main.885fb4c9.chunk.css",
-    "main.js": "/SocialNetwork/static/js/main.3572234b.chunk.js",
-    "main.js.map": "/SocialNetwork/static/js/main.3572234b.chunk.js.map",
+    "main.js": "/SocialNetwork/static/js/main.6c96e533.chunk.js",
+    "main.js.map": "/SocialNetwork/static/js/main.6c96e533.chunk.js.map",
     "runtime-main.js": "/SocialNetwork/static/js/runtime-main.090bd75b.js",
     "runtime-main.js.map": "/SocialNetwork/static/js/runtime-main.090bd75b.js.map",
     "static/js/2.4d8704d3.chunk.js": "/SocialNetwork/static/js/2.4d8704d3.chunk.js",
     "static/js/2.4d8704d3.chunk.js.map": "/SocialNetwork/static/js/2.4d8704d3.chunk.js.map",
     "index.html": "/SocialNetwork/index.html",
-    "precache-manifest.910518ab36f48a771a48a6cf8ea22386.js": "/SocialNetwork/precache-manifest.910518ab36f48a771a48a6cf8ea22386.js",
+    "precache-manifest.9405f7b2795958db0d6d6f26cc63048c.js": "/SocialNetwork/precache-manifest.9405f7b2795958db0d6d6f26cc63048c.js",
     "service-worker.js": "/SocialNetwork/service-worker.js",
     "static/css/main.885fb4c9.chunk.css.map": "/SocialNetwork/static/css/main.885fb4c9.chunk.css.map",
     "static/js/2.4d8704d3.chunk.js.LICENSE.txt": "/SocialNetwork/static/js/2.4d8704d3.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.090bd75b.js",
     "static/js/2.4d8704d3.chunk.js",
     "static/css/main.885fb4c9.chunk.css",
-    "static/js/main.3572234b.chunk.js"
+    "static/js/main.6c96e533.chunk.js"
   ]
 }
