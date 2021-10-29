@@ -21,3 +21,12 @@
 .profileIntro p {
     margin: 5px 0 0 0;
 }
+.profileIntro h4 {
+    margin: 8px 0 0 0;
+}
+.profileIntro .noInfo {
+    margin: 20px 0 0 0;
+}
+.profileIntro .contacts {
+    margin: 0;
+}

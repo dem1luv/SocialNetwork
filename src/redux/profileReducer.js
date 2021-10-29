@@ -2,6 +2,8 @@ const ADD_POST = "ADD-POST";
 const CHANGE_INPUT = "CHANGE-INPUT";
 const DO_LIKE = "DO-LIKE";
 const DO_UNLIKE = "DO-UNLIKE";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
+const TOGGLE_FETCHING = "TOGGLE_FETCHING";
 
 let initState = {
     posts: [
@@ -19,24 +21,13 @@ let initState = {
         },
     ],
     textInput: "",
-    user: {
-        id: 0,
-        avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
-        bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
-        name: "Dmitriy Demyanenko",
-        city: "Sumy",
-        country: "Ukraine",
-        intro: [
-            {id: 0, title: "About me", text: "Frontend developer 16 y.o. 😉"},
-            {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
-        ],
-    },
+    userProfile: {},
+    isFetching: true,
 }
 
 const profileReducer = (state = initState, action) => {
     switch (action.type) {
         case ADD_POST:
-            debugger;
             return {
                 ...state,
                 posts: [{
@@ -76,26 +67,39 @@ const profileReducer = (state = initState, action) => {
                     return p;
                 })]
             }
+        case SET_USER_PROFILE:
+            return {...state, userProfile: action.userProfile}
+        case TOGGLE_FETCHING:
+            debugger
+            return {...state, isFetching: action.isFetching}
         default:
             return state;
     }
 }
 
-export const addPostAC = currentUser => ({
+export const addPost = currentUser => ({
     type: ADD_POST,
     currentUser: currentUser,
 });
-export const changeInputAC = text => ({
+export const changeInput = text => ({
     type: CHANGE_INPUT,
     text: text,
 });
-export const doLikeAC = postId => ({
+export const doLike = postId => ({
     type: DO_LIKE,
     postId: postId,
 });
-export const doUnlikeAC = postId => ({
+export const doUnlike = postId => ({
     type: DO_UNLIKE,
     postId: postId,
+});
+export const setUserProfile = userProfile => ({
+    type: SET_USER_PROFILE,
+    userProfile: userProfile,
+});
+export const toggleFetching = isFetching => ({
+    type: TOGGLE_FETCHING,
+    isFetching: isFetching,
 });
 
 export default profileReducer;

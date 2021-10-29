@@ -3,6 +3,10 @@
     max-width: 180px;
 }
 
+.user a {
+    text-decoration: none;
+}
+
 .user img {
     width: 180px;
     height: 180px;
@@ -11,6 +15,7 @@
 
 .user h4 {
     text-align: center;
+    color: #c1c1c1;
 }
 
 .user button {

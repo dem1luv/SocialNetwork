@@ -1,25 +1,20 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 
-class ProfileInfo extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const ProfileInfo = props => {
+    const photoUrl = props.largePhoto ? props.largePhoto : "https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png"
 
-    render() {
-        return (
-            <div className={s.profileInfo}>
-                <div className={s.background}>
-                    <img src={this.props.user.bgUrl} alt=""/>
-                </div>
-                <div className={s.ava}>
-                    <img src={this.props.user.avaUrl} alt=""/>
-                </div>
-                <div className={s.name}>{this.props.user.name}</div>
-                <div className={s.location}>{this.props.user.country}, {this.props.user.city}</div>
+    return (
+        <div className={s.profileInfo}>
+            <div className={s.background} style={ {"backgroundImage": "url(" + photoUrl + ")"} }>
+                <div></div>
             </div>
-        );
-    }
+            <div className={s.ava}>
+                <img src={photoUrl} alt=""/>
+            </div>
+            <div className={s.name}>{props.fullName}</div>
+        </div>
+    );
 }
 
 export default ProfileInfo;

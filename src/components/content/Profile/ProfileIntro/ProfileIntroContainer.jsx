@@ -2,12 +2,17 @@ import React from "react";
 import {connect} from "react-redux";
 import ProfileIntro from "./ProfileIntro";
 
+class ProfileIntroContainer extends React.Component {
+    render() {
+        return <ProfileIntro {...this.props}/>
+    }
+}
+
 const mapStateToProps = state => ({
-    userIntro: state.currentUser.intro,
+    aboutMe: state.profilePage.userProfile.aboutMe,
+    lookingForAJob: state.profilePage.userProfile.lookingForAJob,
+    lookingForAJobDescription: state.profilePage.userProfile.lookingForAJobDescription,
+    contacts: state.profilePage.userProfile.contacts
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-let ProfileIntroContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileIntro);
-
-export default ProfileIntroContainer;
+export default connect(mapStateToProps, {})(ProfileIntroContainer);

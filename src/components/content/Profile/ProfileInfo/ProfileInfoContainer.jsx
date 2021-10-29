@@ -1,14 +1,16 @@
 import React from "react";
-import s from "./ProfileInfo.module.css";
 import {connect} from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 
+class ProfileInfoContainer extends React.Component {
+    render() {
+        return <ProfileInfo {...this.props}/>
+    }
+}
+
 const mapStateToProps = state => ({
-    user: state.currentUser,
+    largePhoto: state.profilePage.userProfile?.photos?.large,
+    fullName: state.profilePage.userProfile?.fullName
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-let ProfileInfoContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);
-
-export default ProfileInfoContainer;
+export default connect(mapStateToProps, {})(ProfileInfoContainer)

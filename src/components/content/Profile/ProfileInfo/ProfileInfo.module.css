@@ -5,12 +5,16 @@
     grid-area: info;
 }
 /* background */
-.background img{
+.background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.background div {
     width: 100%;
     height: 400px;
-    object-fit: cover;
-}
-/* ava */
+    backdrop-filter: blur(8px);
+}/* ava */
 .ava {
     overflow: hidden;
     display: inline-block;

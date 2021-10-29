@@ -1,30 +1,38 @@
 import React from "react";
-import {connect} from "react-redux";
 import ProfilePosts from "./ProfilePosts";
-import {addPostAC, changeInputAC, doLikeAC, doUnlikeAC} from "../../../../redux/profileReducer";
-import currentUserReducer from "../../../../redux/currentUserReducer";
+import {addPost, changeInput, doLike, doUnlike} from "../../../../redux/profileReducer";
+import {connect} from "react-redux";
 
-const mapStateToProps = (state) => ({
+class ProfilePostsContainer extends React.Component {
+    onAddPost() {
+        this.props.addPost(this.props.currentUser);
+    }
+
+    onChangeInput = this.props.changeInput;
+
+    onDoUnlike = this.props.doUnlike;
+
+    onDoLike = this.props.doLike;
+
+    render() {
+        return <ProfilePosts
+            textInput={this.props.textInput}
+            posts={this.props.posts}
+            currentUser={this.props.currentUser}
+            onAddPost={this.onAddPost.bind(this)}
+            onChangeInput={this.onChangeInput.bind(this)}
+            onDoUnlike={this.onDoUnlike.bind(this)}
+            onDoLike={this.onDoLike.bind(this)}
+        />
+    }
+}
+
+const mapStateToProps = state => ({
+    textInput: state.profilePage.textInput,
     posts: state.profilePage.posts,
-    inputText: state.profilePage.textInput,
-    currentUser: state.currentUser,
+    currentUser: state.currentUser
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    addPost: currentUser => {
-        dispatch(addPostAC(currentUser));
-    },
-    changeInput: (text, scrollHeight) => {
-        dispatch(changeInputAC(text, scrollHeight));
-    },
-    doLike: postId => {
-        dispatch(doLikeAC(postId))
-    },
-    doUnlike: postId => {
-        dispatch(doUnlikeAC(postId))
-    },
-});
-
-let ProfilePostsContainer = connect(mapStateToProps, mapDispatchToProps)(ProfilePosts);
-
-export default ProfilePostsContainer;
+export default connect(mapStateToProps, {
+    addPost, changeInput, doLike, doUnlike
+})(ProfilePostsContainer);

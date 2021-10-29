@@ -1,5 +1,6 @@
 import React from 'react';
 import s from "./User.module.css";
+import {NavLink} from "react-router-dom";
 
 const User = props => {
     const photoUrl = props.photo ? props.photo : "https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png"
@@ -12,8 +13,10 @@ const User = props => {
 
     return (
         <div className={s.user}>
-            <img src={photoUrl} alt=""/>
-            <h4>{props.name}</h4>
+            <NavLink to={"/profile/" + props.id}>
+                <img src={photoUrl} alt=""/>
+                <h4>{props.name}</h4>
+            </NavLink>
             {followButton}
         </div>
     )

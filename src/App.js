@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {HashRouter, Route} from 'react-router-dom';
-import Profile from "./components/content/Profile/Profile";
+import ProfileContainer from "./components/content/Profile/ProfileContainer";
 import Messages from "./components/content/Messages/Messages";
 import Music from "./components/content/Music/Music";
 import Settings from "./components/content/Settings/Settings";
@@ -19,7 +19,7 @@ class App extends React.Component {
                     <HeaderContainer/>
                     <SidebarLeftContainer/>
                     <main className="content">
-                        <Route path="/profile" component={Profile}/>
+                        <Route path="/profile/:userId" component={ProfileContainer}/>
                         <Route path="/news" component={NewsContainer}/>
                         <Route path="/messages" component={Messages}/>
                         <Route path="/music" component={Music}/>
