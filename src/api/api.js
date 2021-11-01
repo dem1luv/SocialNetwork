@@ -8,11 +8,8 @@ const axiosInstance = axios.create({
 })
 
 export const getUsers = (page = 1, usersCount = 10) => {
-    return axiosInstance.get(`users?page=${page}&count=${usersCount}`, {
-        headers: {
-            'API-KEY': 'ba3b16ba-c3a0-404f-acd8-1f2bd9f7b405'
-        }
-    }).then(response => response.data);
+    return axiosInstance.get(`users?page=${page}&count=${usersCount}`)
+        .then(response => response.data);
 }
 
 export const getUserProfile = (userId) => {
