@@ -12,7 +12,7 @@ const SAVE_CHANGES = "SAVE-CHANGES";
 const RESET_CHANGES = "RESET-CHANGES";
 
 let initState = {
-    id: 0,
+    id: 20332,
     avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
     bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
     name: "Dmitriy Demyanenko",

@@ -4,15 +4,15 @@ import {connect} from "react-redux";
 import {addPost, changeInput, doLike, doUnlike, setUserProfile, toggleFetching} from "../../../redux/profileReducer";
 import axios from "axios";
 import {withRouter} from "react-router";
+import {getUserProfile} from "../../../api/api";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         this.props.toggleFetching(true);
         let userId = this.props.match.params.userId;
-        axios.get("https://social-network.samuraijs.com/api/1.0/profile/" + userId)
-            .then(response => {
+        getUserProfile(userId).then(data => {
                 this.props.toggleFetching(false);
-                this.props.setUserProfile(response.data);
+                this.props.setUserProfile(data);
             });
     }
 

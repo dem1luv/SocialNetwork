@@ -5,33 +5,26 @@ import {setUsersAC, toggleFetchingAC} from "../../../redux/usersReducer";
 import {setUsersTotalCountAC} from "../../../redux/usersReducer";
 import {setCurrentPageAC} from "../../../redux/usersReducer";
 import axios from "axios";
+import {getUsers} from "../../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=${this.props.usersCount}`, {
-            headers: {
-                'API-KEY': 'ba3b16ba-c3a0-404f-acd8-1f2bd9f7b405'
-            }
-        })
-            .then(response => {
+        getUsers(1, this.props.usersCount)
+            .then(data => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setUsersTotalCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setUsersTotalCount(data.totalCount);
             })
             .catch(() => this.props.toggleFetching(false));
     }
 
     onSetCurrentPage(page) {
         this.props.toggleFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`, {
-            headers: {
-                'API-KEY': 'ba3b16ba-c3a0-404f-acd8-1f2bd9f7b405'
-            }
-        })
-            .then(response => {
+        getUsers(this.props.currentPage, this.props.usersCount)
+            .then(data => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
                 this.props.setCurrentPage(page);
             })
             .catch(() => this.props.toggleFetching(false));
