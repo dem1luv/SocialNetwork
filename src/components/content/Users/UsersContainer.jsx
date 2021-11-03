@@ -1,33 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {setUsersAC, toggleFetchingAC} from "../../../redux/usersReducer";
-import {setUsersTotalCountAC} from "../../../redux/usersReducer";
-import {setCurrentPageAC} from "../../../redux/usersReducer";
-import axios from "axios";
-import {getUsers} from "../../../api/api";
+import {setUsers, toggleFetching, getUsers} from "../../../redux/usersReducer";
+import {setUsersTotalCount} from "../../../redux/usersReducer";
+import {setCurrentPage} from "../../../redux/usersReducer";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true);
-        getUsers(1, this.props.usersCount)
-            .then(data => {
-                this.props.toggleFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setUsersTotalCount(data.totalCount);
-            })
-            .catch(() => this.props.toggleFetching(false));
+        this.props.getUsers(1, this.props.usersCount);
     }
 
     onSetCurrentPage(page) {
-        this.props.toggleFetching(true);
-        getUsers(this.props.currentPage, this.props.usersCount)
-            .then(data => {
-                this.props.toggleFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setCurrentPage(page);
-            })
-            .catch(() => this.props.toggleFetching(false));
+        this.props.getUsers(page, this.props.usersCount);
     }
 
     render() {
@@ -50,19 +34,6 @@ const mapStateToProps = state => ({
     isFetching: state.usersPage.isFetching
 });
 
-const mapDispatchToProps = dispatch => ({
-    setUsers: users => {
-        dispatch(setUsersAC(users))
-    },
-    setUsersTotalCount: usersTotalCount => {
-        dispatch(setUsersTotalCountAC(usersTotalCount))
-    },
-    setCurrentPage: page => {
-        dispatch(setCurrentPageAC(page))
-    },
-    toggleFetching: isFetching => {
-        dispatch(toggleFetchingAC(isFetching))
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    setUsers, setUsersTotalCount, setCurrentPage, toggleFetching, getUsers
+})(UsersContainer);

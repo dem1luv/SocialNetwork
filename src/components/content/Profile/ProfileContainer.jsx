@@ -1,19 +1,16 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {addPost, changeInput, doLike, doUnlike, setUserProfile, toggleFetching} from "../../../redux/profileReducer";
-import axios from "axios";
+import {
+    getUserProfile,
+    setUserProfile,
+    toggleFetching
+} from "../../../redux/profileReducer";
 import {withRouter} from "react-router";
-import {getUserProfile} from "../../../api/api";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true);
-        let userId = this.props.match.params.userId;
-        getUserProfile(userId).then(data => {
-                this.props.toggleFetching(false);
-                this.props.setUserProfile(data);
-            });
+        this.props.getUserProfile(this.props.match.params.userId);
     }
 
     render() {
@@ -28,5 +25,5 @@ const mapStateToProps = state => ({
 const ProfileContainerWithRouter = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, {
-    toggleFetching, setUserProfile
+    toggleFetching, setUserProfile, getUserProfile
 })(ProfileContainerWithRouter);

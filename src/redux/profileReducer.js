@@ -1,3 +1,5 @@
+import {userAPI} from "../api/api";
+
 const ADD_POST = "ADD-POST";
 const CHANGE_INPUT = "CHANGE-INPUT";
 const DO_LIKE = "DO-LIKE";
@@ -97,6 +99,15 @@ export const setUserProfile = userProfile => ({
     type: SET_USER_PROFILE,
     userProfile: userProfile,
 });
+export const getUserProfile = userId => {
+    return dispatch => {
+        dispatch(toggleFetching(true));
+        userAPI.getUserProfile(userId).then(data => {
+            dispatch(setUserProfile(data));
+            dispatch(toggleFetching(false));
+        });
+    }
+}
 export const toggleFetching = isFetching => ({
     type: TOGGLE_FETCHING,
     isFetching: isFetching,

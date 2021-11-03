@@ -7,12 +7,13 @@ const axiosInstance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
 })
 
-export const getUsers = (page = 1, usersCount = 10) => {
-    return axiosInstance.get(`users?page=${page}&count=${usersCount}`)
-        .then(response => response.data);
-}
-
-export const getUserProfile = (userId) => {
-    return axiosInstance.get(`profile/${userId}`)
-        .then(response => response.data);
+export const userAPI = {
+    getUsers(page = 1, usersCount = 10) {
+        return axiosInstance.get(`users?page=${page}&count=${usersCount}`)
+            .then(response => response.data);
+    },
+    getUserProfile(userId) {
+        return axiosInstance.get(`profile/${userId}`)
+            .then(response => response.data);
+    }
 }
