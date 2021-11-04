@@ -11,8 +11,11 @@ let initState = {
             likesCount: 0,
             user: {
                 id: 0,
-                avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
-                name: "Dmitriy Demyanenko",
+                photos: {
+                    small: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
+                    large: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
+                },
+                name: "Test User",
             }
         },
     ],

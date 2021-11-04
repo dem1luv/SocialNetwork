@@ -21,3 +21,7 @@
 .user button {
     width: 100%;
 }
+
+.user button a {
+    color: #000;
+}

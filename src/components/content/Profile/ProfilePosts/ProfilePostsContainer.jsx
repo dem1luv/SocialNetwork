@@ -30,7 +30,7 @@ class ProfilePostsContainer extends React.Component {
 const mapStateToProps = state => ({
     textInput: state.profilePage.textInput,
     posts: state.profilePage.posts,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
 });
 
 export default connect(mapStateToProps, {

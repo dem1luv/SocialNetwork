@@ -9,8 +9,10 @@ class ProfilePosts extends React.Component {
     }
 
     componentDidMount() {
-        this.textareaElement.current.style.height = "33px";
-        this.textareaElement.current.style.height = (this.textareaElement.current.scrollHeight) + "px";
+        if (this.textareaElement.current) {
+            this.textareaElement.current.style.height = "33px";
+            this.textareaElement.current.style.height = (this.textareaElement.current.scrollHeight) + "px";
+        }
     }
 
     onAddPost() {
@@ -25,17 +27,26 @@ class ProfilePosts extends React.Component {
     }
 
     render() {
+        const photoUrl = this.props.currentUser.photos.small
+            ? this.props.currentUser.photos.small
+            : "https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png"
+
         return (
             <div className={s.profilePosts}>
-                <div className={s.addPostContainer}>
-                    <img src={this.props.currentUser.avaUrl} alt=""/>
-                    <textarea type="text" value={this.props.textInput} onChange={this.onChangeInput.bind(this)}
-                              placeholder="Hey, what's up?"
-                              ref={this.textareaElement}/>
-                    <button onClick={this.onAddPost.bind(this)}>Post</button>
-                </div>
+                {this.props.currentUser.isLoggedIn ? (
+                    <div className={s.addPostContainer}>
+                        <img src={photoUrl} alt=""/>
+                        <textarea type="text" value={this.props.textInput} onChange={this.onChangeInput.bind(this)}
+                                  placeholder="Hey, what's up?"
+                                  ref={this.textareaElement}/>
+                        <button onClick={this.onAddPost.bind(this)}>Post</button>
+                    </div> )
+                    : null
+                }
                 <div className={s.postsContainer}>
-                    {this.props.posts.map((p) => <Post key={p.id} post={p} onDoLike={this.props.onDoLike} onDoUnlike={this.props.onDoUnlike}/>)}
+                    {this.props.posts.map((p) => <Post key={p.id} post={p} onDoLike={this.props.onDoLike}
+                                                       onDoUnlike={this.props.onDoUnlike}
+                                                       isLoggedIn={this.props.currentUser.isLoggedIn}/>)}
                 </div>
             </div>
         );

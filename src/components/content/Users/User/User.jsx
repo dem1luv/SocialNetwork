@@ -5,7 +5,10 @@ import {NavLink} from "react-router-dom";
 const User = props => {
     const photoUrl = props.photo ? props.photo : "https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png"
     let followButton;
-    if (props.followed) {
+    if (!props.isLoggedIn) {
+        followButton = <button><NavLink to={'/login'}>Follow</NavLink></button>
+    }
+    else if (props.followed) {
         followButton = <button>Unfollow</button>
     } else {
         followButton = <button>Follow</button>

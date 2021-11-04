@@ -19,7 +19,8 @@ const Users = props => {
         }
     }
 
-    let usersElements = props.users.map(u => <User key={u.id} id={u.id} name={u.name} photo={u.photos.small} followed={u.followed}/>);
+    let usersElements = props.users.map(u => <User key={u.id} id={u.id} name={u.name} photo={u.photos.small}
+                                                   followed={u.followed} isLoggedIn={props.isLoggedIn}/>);
 
     return <div className={s.usersContent}>
         {props.isFetching ? <Preloader/> : (<>

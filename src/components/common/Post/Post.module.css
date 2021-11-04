@@ -58,11 +58,13 @@
     display: flex;
     align-items: center;
 }
-.stat button img{
+.stat button img,
+.stat a img {
     width: 25px;
     height: 25px;
 }
-.stat button {
+.stat button,
+.stat a img {
     background: none;
     cursor: pointer;
     border: none;

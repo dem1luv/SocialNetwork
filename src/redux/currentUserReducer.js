@@ -1,3 +1,5 @@
+import {authAPI, userAPI} from "../api/api";
+
 const CHANGE_NAME = "CHANGE-NAME";
 const CHANGE_AVA = "CHANGE-AVA";
 const CHANGE_BG = "CHANGE-BG";
@@ -10,9 +12,18 @@ const CHANGE_INTRO_TEXT = "CHANGE-INTRO-TEXT";
 const DELETE_INTRO = "DELETE-INTRO";
 const SAVE_CHANGES = "SAVE-CHANGES";
 const RESET_CHANGES = "RESET-CHANGES";
+const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 let initState = {
-    id: 20332,
+    data: {
+        id: undefined,
+        email: undefined,
+        login: undefined,
+    },
+    photos: {
+        small: undefined,
+        large: undefined,
+    },
     avaUrl: "https://hypeava.ru/uploads/posts/2020-03/1583012706_5.jpg",
     bgUrl: "https://storge.pic2.me/cm/3200x1800/592/55fc5d8db7b39.jpg",
     name: "Dmitriy Demyanenko",
@@ -33,6 +44,7 @@ let initState = {
             {id: 1, title: "Favorite anime", text: "JoJo's Bizzare Adventure"},
         ],
     },
+    isLoggedIn: false,
 }
 
 const currentUserReducer = (state = initState, action) => {
@@ -161,6 +173,14 @@ const currentUserReducer = (state = initState, action) => {
                 },
             };
         }
+        case SET_CURRENT_USER: {
+            return {
+                ...state,
+                data: action.data,
+                photos: action.photos,
+                isLoggedIn: true,
+            };
+        }
         default:
             return state;
     }
@@ -191,7 +211,7 @@ export const changeCountryAC = (user, country) => ({
     user: user,
     country: country,
 });
-export const logOutAC = () => ({
+export const logOut = () => ({
     type: LOG_OUT,
 });
 export const addIntroAC = () => ({
@@ -217,5 +237,18 @@ export const saveChangesAC = () => ({
 export const resetChangesAC = () => ({
     type: RESET_CHANGES,
 });
+
+export const setCurrentUser = (data, photos)  => ({
+    type: SET_CURRENT_USER, data, photos
+});
+export const getCurrentUser = () => {
+    return dispatch => {
+        authAPI.me().then(userData => {
+            userAPI.getUserProfile(userData.data.id).then(profileData => {
+                dispatch(setCurrentUser(userData.data, profileData.photos));
+            })
+        });
+    }
+}
 
 export default currentUserReducer;

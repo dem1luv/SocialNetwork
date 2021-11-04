@@ -65,3 +65,8 @@
 .userMenuNav button {
     margin: 18px 0 0 0;
 }
+
+.logInLink {
+    color: #fff;
+    text-decoration: none;
+}

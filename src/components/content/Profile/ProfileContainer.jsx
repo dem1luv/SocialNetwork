@@ -19,7 +19,7 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-   isFetching: state.profilePage.isFetching
+    isFetching: state.profilePage.isFetching,
 });
 
 const ProfileContainerWithRouter = withRouter(ProfileContainer);

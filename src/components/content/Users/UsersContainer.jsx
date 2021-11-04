@@ -31,7 +31,8 @@ const mapStateToProps = state => ({
     usersTotalCount: state.usersPage.usersTotalCount,
     usersCount: state.usersPage.usersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    isLoggedIn: state.currentUser.isLoggedIn
 });
 
 export default connect(mapStateToProps, {

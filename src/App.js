@@ -10,6 +10,7 @@ import NewsContainer from "./components/content/News/NewsContainer";
 import SidebarLeftContainer from "./components/SidebarLeft/SidebarLeftContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/content/Users/UsersContainer";
+import LogIn from "./components/content/LogIn/LogIn";
 
 class App extends React.Component {
     render() {
@@ -25,6 +26,7 @@ class App extends React.Component {
                         <Route path="/music" component={Music}/>
                         <Route path="/users" component={UsersContainer}/>
                         <Route path="/settings" component={Settings}/>
+                        <Route path="/login" component={LogIn}/>
                     </main>
                 </div>
             </HashRouter>
